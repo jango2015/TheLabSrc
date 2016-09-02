@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@(Url.Content("~/css/bootstrap.min.css"))" rel="stylesheet" />
+    <link href="@(Url.Content("~/css/style.css"))" rel="stylesheet" />
+</head>
+<body>
+    <div class="body">
+        <div class="page-header">
+            <h3>XXX管理平台</h3>
+        </div>
+        <div class="left">
+            <div class="menu">
+                <nav class="nav">
+                    <ul>
+                        <li>
+                            <a href="/user/Index">会员管理</a>
+                        </li>
+                        <li>
+                            <a href="/courseCategory/Index">课程分类管理</a>
+                        </li>
+                        <li>
+                            <a href="/course/Index">课程管理</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="right">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+@RenderSection("Scripts", false)
+</html>

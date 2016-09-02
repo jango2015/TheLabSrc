@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Models", "Jango.Lab.Models\Jango.Lab.Models.csproj", "{CDA5BBB1-68F8-4BC4-B71C-9C0420BACE3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Repositories", "Jango.Lab.Repositories\Jango.Lab.Repositories.csproj", "{1185C7E9-5646-4360-8F0E-68CF8ECF7417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Web", "Jango.Lab.Web\Jango.Lab.Web.csproj", "{A82BD09E-4965-4EF4-9036-BAB98C0509FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.API", "Jango.Lab.API\Jango.Lab.API.csproj", "{0A28C2A4-E926-4335-81DE-DC08651BAF6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Services", "Jango.Lab.Services\Jango.Lab.Services.csproj", "{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{7350DD14-689B-497C-86D3-DB45567F2490}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\Jango.Lib.CastleWindsor.MVC.dll = Lib\Jango.Lib.CastleWindsor.MVC.dll
+		Lib\Jango.Lib.CastleWindsor.WebAPI.dll = Lib\Jango.Lib.CastleWindsor.WebAPI.dll
+		Lib\Jango.Lib.Repository.Core.dll = Lib\Jango.Lib.Repository.Core.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDA5BBB1-68F8-4BC4-B71C-9C0420BACE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA5BBB1-68F8-4BC4-B71C-9C0420BACE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDA5BBB1-68F8-4BC4-B71C-9C0420BACE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA5BBB1-68F8-4BC4-B71C-9C0420BACE3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1185C7E9-5646-4360-8F0E-68CF8ECF7417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1185C7E9-5646-4360-8F0E-68CF8ECF7417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1185C7E9-5646-4360-8F0E-68CF8ECF7417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1185C7E9-5646-4360-8F0E-68CF8ECF7417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82BD09E-4965-4EF4-9036-BAB98C0509FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82BD09E-4965-4EF4-9036-BAB98C0509FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82BD09E-4965-4EF4-9036-BAB98C0509FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82BD09E-4965-4EF4-9036-BAB98C0509FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A28C2A4-E926-4335-81DE-DC08651BAF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A28C2A4-E926-4335-81DE-DC08651BAF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A28C2A4-E926-4335-81DE-DC08651BAF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A28C2A4-E926-4335-81DE-DC08651BAF6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
