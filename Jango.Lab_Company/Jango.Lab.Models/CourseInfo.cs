@@ -32,7 +32,16 @@ namespace Jango.Lab.Models
         public decimal IntegralUse { get; set; }
         public decimal BalanceUse { get; set; }
         public EnumCourseType CourseType { get; set; }
+
+        [NotMapped]
         public CourseCategory m_CourseCategory { get; set; }
+        [NotMapped]
+        public Coacher m_Coacher { get; set; }
+        [NotMapped]
+        public long CoacherID { get; set; }
+        public long m_CourseCategoryId { get; set; }
+        public DateTime CourseBeginTime { get; set; }
+        public DateTime CourseEndTime { get; set; }
 
     }//end CourseInfo
 

@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@using Jango.Lab.Models;
+@model Jango.Lab.Models.Coacher
+
+@using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST" }))
+{
+
+    <div class="form">
+        <div class="form-group">
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <label>名称</label>
+            <input class="input input-control" type="text" required maxlength="100" name="Name" value="@Model.Name" />
+        </div>
+        <div class="form-group">
+            <label>头像</label>
+            <input class="input input-control" type="tel" required maxlength="11" name="Avatar" value="@Model.Avatar" />
+        </div>
+        <div class="form-group">
+            <label>状态</label>
+            <select class="input input-control" required name="Status">
+                <option value="">--请选择--</option>
+                <option value="0" @(Model.Status == EnumCoachStatus.On ? "selected" : "")>在职</option>
+                <option value="1" @(Model.Status == EnumCoachStatus.Off? "selected" : "")>离职</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <a class="btn btn-primary" href="/coacher/index">返回</a>
+        </div>
+    </div>
+
+}
+@section Scripts{
+
+}

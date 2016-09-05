@@ -6,7 +6,7 @@
 
 @using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST" }))
 {
-    <div class="form">
+    <div class="form"><input type="hidden" name="Id" value="@Model.Id" />
         <div class="form-group">
             <label>名称</label>
             <input class="input input-control" type="text" maxlength="100" name="Name" value="@Model.Name" />

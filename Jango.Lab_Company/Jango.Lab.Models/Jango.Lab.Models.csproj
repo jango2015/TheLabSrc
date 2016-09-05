@@ -59,6 +59,7 @@
     <Compile Include="ChargeRecord.cs" />
     <Compile Include="Coacher.cs" />
     <Compile Include="CourseCategory.cs" />
+    <Compile Include="CourseCoacher.cs" />
     <Compile Include="CourseInfo.cs" />
     <Compile Include="CourseReserveRecord.cs" />
     <Compile Include="CourseSignInRecord.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Defines\EnumCourseReserveStatus.cs" />
     <Compile Include="Defines\EnumCourseType.cs" />
     <Compile Include="Defines\EnumDispatchStatus.cs" />
+    <Compile Include="Defines\EnumExtensions.cs" />
     <Compile Include="Defines\EnumLoglevel.cs" />
     <Compile Include="Defines\EnumMessageType.cs" />
     <Compile Include="Defines\EnumOrderStatus.cs" />
@@ -77,9 +79,17 @@
     <Compile Include="LabModelContext.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Migrations\201609020328470_InitialDB.cs" />
-    <Compile Include="Migrations\201609020328470_InitialDB.Designer.cs">
-      <DependentUpon>201609020328470_InitialDB.cs</DependentUpon>
+    <Compile Include="Migrations\201609050858164_InitialDB.cs" />
+    <Compile Include="Migrations\201609050858164_InitialDB.Designer.cs">
+      <DependentUpon>201609050858164_InitialDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609050948472_courseTime.cs" />
+    <Compile Include="Migrations\201609050948472_courseTime.Designer.cs">
+      <DependentUpon>201609050948472_courseTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609051025490_addCourseCoacher.cs" />
+    <Compile Include="Migrations\201609051025490_addCourseCoacher.Designer.cs">
+      <DependentUpon>201609051025490_addCourseCoacher.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
@@ -95,8 +105,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609020328470_InitialDB.resx">
-      <DependentUpon>201609020328470_InitialDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609050858164_InitialDB.resx">
+      <DependentUpon>201609050858164_InitialDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050948472_courseTime.resx">
+      <DependentUpon>201609050948472_courseTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609051025490_addCourseCoacher.resx">
+      <DependentUpon>201609051025490_addCourseCoacher.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

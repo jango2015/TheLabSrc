@@ -1,4 +1,5 @@
-﻿using Jango.Lab.Services;
+﻿using Jango.Lab.Models;
+using Jango.Lab.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,26 @@ namespace Jango.Lab.Web.Controllers
         {
             var users = _userSrv.GetUserList();
             return View(users);
+        }
+
+        public ActionResult Edit(long id = 0)
+        {
+            var model = _userSrv.GetById(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(User model)
+        {
+            try
+            {
+
+                _userSrv.Save(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

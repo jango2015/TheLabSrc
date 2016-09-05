@@ -10,7 +10,9 @@
 
 </div>
 <div class="panel">
-
+    <div class="btn-group">
+        <a href="/user/Edit" class="btn btn-default">新增</a>
+    </div>
 </div>
 
 <div class="panel-body">
@@ -26,6 +28,7 @@
                 <th>会员积分</th>
                 <th>账户余额</th>
                 <th>创建时间</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -39,17 +42,27 @@
                         <td>@item.Email</td>
                         <td>@item.Level</td>
                         <td>@item.Birthday.ToString("yyyy/MM/dd")</td>
-                        <td>@item.m_UserAccounts.Select(a => a.AccountType == (int)Jango.Lab.Models.EnumAccountType.Integral)?.Amount</td>
-                        <td>@item.m_UserAccounts.Select(a => a.AccountType == (int)Jango.Lab.Models.EnumAccountType.Balance)?.Amount</td>
+                        @if (item.m_UserAccounts != null && item.m_UserAccounts.Any())
+                        {
+                            <td>@item.m_UserAccounts.Select(a => a.AccountType == (int)Jango.Lab.Models.EnumAccountType.Integral)?.Amount</td>
+                            <td>@item.m_UserAccounts.Select(a => a.AccountType == (int)Jango.Lab.Models.EnumAccountType.Balance)?.Amount</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                        }
                         <td>@item.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")</td>
-
+                        <td>
+                            <a href="/user/edit?id=@item.ID">编辑</a>
+                        </td>
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td colspan="8">
+                    <td colspan="9">
                         <div class="alert-warning ">暂无记录</div>
                     </td>
                 </tr>
@@ -58,7 +71,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="8">
+                <td colspan="9">
                     <nav>
                         <ul class="pagination">
                             <li>

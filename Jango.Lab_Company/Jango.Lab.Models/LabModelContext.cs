@@ -29,5 +29,7 @@ namespace Jango.Lab.Models
         public DbSet<UserConsigneeInfo> UserConsigneeInfos { get; set; }
 
         public DbSet<CourseCategory> CourseCategories { get; set; }
+
+        public DbSet<CourseCoacher> CourseCoachers { get; set; }
     }
 }

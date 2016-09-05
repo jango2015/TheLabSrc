@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@using Jango.Lab.Models;
+@model Jango.Lab.Models.User
+
+<link href="@Url.Content("~/css/bootstrap-datetimepicker.min.css")" rel="stylesheet" />
+@using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST" }))
+{
+
+    <div class="form">
+        <div class="form-group"><input type="hidden" name="ID" value="@Model.ID" />
+            <label>名称</label>
+            <input class="input input-control" type="text" required maxlength="100" name="Name" value="@Model.Name" />
+        </div>
+        <div class="form-group">
+            <label>手机号</label>
+            <input class="input input-control" type="tel" required maxlength="11" name="Mobile" value="@Model.Mobile" />
+        </div>
+        <div class="form-group">
+            <label>邮箱</label>
+            <input class="input input-control" type="email"  maxlength="100" name="Email" value="@Model.Email" />
+        </div>
+        <div class="form-group">
+            <label>会员等级</label>
+            <select class="input input-control">
+
+                @{
+                    var its = typeof(EnumUserLevel).EnumToDic().ToList();
+                    foreach (var item in its)
+                    {
+                        <option value="@item.Value">@item.Key</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>生日</label>
+            <input class="input input-control form_datetime"  type="text" readonly="readonly" maxlength="100" id="Birthday" name="Birthday" value="@Model.Birthday" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <a class="btn btn-primary" href="/user/index">返回</a>
+        </div>
+    </div>
+
+                    }
+@section Scripts{
+
+    <script src="@Url.Content("~/scripts/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({ "todayBtn":true, format: 'yyyy-mm-dd  hh:ii' });
+    </script>
+}

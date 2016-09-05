@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "教练管理";
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@model IEnumerable<Jango.Lab.Models.Coacher>
+<h2>@ViewBag.Title</h2>
+
+<div class="search">
+
+</div>
+<div class="panel">
+    <div class="btn-group">
+        <a href="/Coacher/Edit" class="btn btn-default">新增</a>
+    </div>
+</div>
+
+<div class="panel-body">
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>头像</th>
+                <th>状态</th>
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Avatar</td>
+                        <td>@item.Status</td>
+                        <td>@item.CreatedUser</td>
+                        <td>@item.CreatedAt.ToString("yyyy/MM/dd")</td>
+                        <td>
+                            <a href="/Coacher/edit?id=@item.ID">编辑</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div class="alert-warning ">暂无记录</div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+</div>

@@ -61,6 +61,40 @@ namespace Jango.Lab.Services
             }
             _uow.Commit();
         }
+
+        public CourseInfo GetCourseById(long id)
+        {
+            if (id == 0) return new CourseInfo() { m_Coacher = new Coacher(), m_CourseCategory = new CourseCategory() };
+            var item = _courseInfoRep.GetById(id);
+            item.m_CourseCategory = _courseCategoryRep.GetById(item.m_CourseCategoryId);
+            return item;
+            //var item = _courseInfoRep.GetByIdIncludeEntitys<CourseCategory>(id, x => x.m_CourseCategory);
+            //return item;
+        }
+
+        public void SaveCourse(CourseInfo model)
+        {
+
+            model.m_CourseCategory = _courseCategoryRep.GetById(model.m_CourseCategoryId);
+            if (model.ID == 0)
+            {
+                _courseInfoRep.Add(model);
+            }
+            else
+            {
+                var item = _courseInfoRep.GetById(model.ID);
+                item.Title = model.Title;
+                item.IntegralUse = model.IntegralUse;
+                item.BalanceUse = model.BalanceUse;
+                item.CourseType = model.CourseType;
+                //item.m_CourseCategory = model.m_CourseCategory;
+                item.m_CourseCategoryId = model.m_CourseCategoryId;
+                item.Desc = model.Desc;
+                _courseInfoRep.Update(item);
+                //_courseInfoRep
+            }
+            _uow.Commit();
+        }
     }
 
     public interface ICourseInfoService
@@ -71,7 +105,9 @@ namespace Jango.Lab.Services
 
         void Save(CourseCategory model);
 
+        CourseInfo GetCourseById(long id);
 
+        void SaveCourse(CourseInfo model);
         IEnumerable<CourseInfo> GetCourseList();
     }
 }

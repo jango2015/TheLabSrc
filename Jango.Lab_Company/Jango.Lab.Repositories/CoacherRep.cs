@@ -16,4 +16,12 @@ namespace Jango.Lab.Repositories
         }
     }
     public interface ICoacherRep : IRepository<Coacher>, ILabBaseRepository { }
+
+    public class CourseCoacherRep : LabBaseRepository<CourseCoacher>, ICourseCoacherRep
+    {
+        public CourseCoacherRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
+        {
+        }
+    }
+    public interface ICourseCoacherRep : IRepository<CourseCoacher>, ILabBaseRepository { }
 }

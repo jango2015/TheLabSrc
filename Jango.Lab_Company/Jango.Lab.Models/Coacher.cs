@@ -31,7 +31,11 @@ namespace Jango.Lab.Models
         public string Name { get; set; }
         public EnumCoachStatus Status { get; set; }
 
+        [NotMapped]
+        public ICollection<CourseInfo> Courses { get; set; }
 
     }//end Coacher
+
+  
 
 }//end namespace Jango.Lab.Models

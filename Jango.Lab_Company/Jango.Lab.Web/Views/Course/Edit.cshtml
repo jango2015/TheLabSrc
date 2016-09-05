@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@using Jango.Lab.Models;
+@model Jango.Lab.Models.CourseInfo
+
+<link href="@Url.Content("~/css/bootstrap-datetimepicker.min.css")" rel="stylesheet" />
+@using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST" }))
+{
+
+    <div class="form">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <div class="form-group">
+            <label>标题</label>
+            <input class="input input-control" type="text" required maxlength="100" name="Title" value="@Model.Title" />
+        </div>
+        <div class="form-group">
+            <label>使用积分数</label>
+            <input class="input input-control" type="number" maxlength="7" name="IntegralUse" value="@Model.IntegralUse" />
+        </div>
+        <div class="form-group">
+            <label>使用余额数</label>
+            <input class="input input-control" type="number" maxlength="7" name="BalanceUse" value="@Model.BalanceUse" />
+        </div>
+        <div class="form-group">
+            <label>开始时间</label>
+            <input class="input input-control form_datetime" type="text" maxlength="20" required name="CourseBeginTime" value="@Model.CourseBeginTime" />
+        </div>
+        <div class="form-group">
+            <label>结束时间</label>
+            <input class="input input-control form_datetime" type="text" maxlength="20" required name="CourseEndTime" value="@Model.CourseEndTime" />
+        </div>
+        <div class="form-group">
+            <label>教练</label>
+            <select class="input input-control" required name="m_CourseCategoryId">
+                @{
+                    var coachers = ViewBag.Coachers as IEnumerable<Coacher>;
+                    <option value="">--请选择--</option>
+                    foreach (var item in coachers)
+                    {
+                        var sS = "";
+                        if (Model.m_Coacher.ID == item.ID)
+                        {
+                            sS = " selected ";
+                        }
+                        <option value="@item.ID" @sS>@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>类型</label>
+            <select class="input input-control" required name="CourseType">
+                @{
+                    string cStr = "", aStr = "", oStr = "";
+                    if (Model.CourseType == EnumCourseType.Course)
+                    {
+                        cStr = " selected ";
+                    }
+                    else if (Model.CourseType == EnumCourseType.Activity)
+                    {
+                        aStr = " selected ";
+                    }
+                    else
+                    {
+                        oStr = " Selected ";
+                    }
+                }
+                <option value="" @oStr>--请选择--</option>
+                <option value="0" @cStr>课程</option>
+                <option value="1" @aStr>活动</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>课程/活动分类</label>
+            <select class="input input-control" required name="m_CourseCategoryId">
+                @{
+                    var categories = ViewBag.categories as IEnumerable<CourseCategory>;
+                    <option value="">--请选择--</option>
+                    foreach (var item in categories)
+                    {
+                        var sS = "";
+                        if (Model.m_CourseCategoryId == item.Id)
+                        {
+                            sS = " selected ";
+                        }
+                        <option value="@item.Id" @sS>@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>说明</label>
+            <textarea class="input input-control" type="text" rows="5" name="Desc">@Model.Desc</textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <a class="btn btn-primary" href="/course/index">返回</a>
+        </div>
+    </div>
+
+                    }
+@section Scripts{
+
+    <script src="@Url.Content("~/scripts/bootstrap-datetimepicker.min.js")"></script>
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({ "todayBtn": true, format: 'yyyy-mm-dd  hh:ii' });
+    </script>
+}

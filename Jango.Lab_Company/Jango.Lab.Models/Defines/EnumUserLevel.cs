@@ -13,29 +13,31 @@ using System.IO;
 
 
 
-namespace Jango.Lab.Models {
-	/// <summary>
-	/// 会员等级
-	/// </summary>
-	public enum EnumUserLevel  {
+namespace Jango.Lab.Models
+{
+    /// <summary>
+    /// 会员等级
+    /// </summary>
+    public enum EnumUserLevel : int
+    {
 
-		/// <summary>
-		/// 次卡
-		/// </summary>
-		CountCard,
-		/// <summary>
-		/// 月卡
-		/// </summary>
-		MonthCard,
-		/// <summary>
-		/// 全通次卡
-		/// </summary>
-		AllCountCard,
-		/// <summary>
-		/// 全通月卡
-		/// </summary>
-		AllMonthCard
+        /// <summary>
+        /// 次卡
+        /// </summary>
+        CountCard,
+        /// <summary>
+        /// 月卡
+        /// </summary>
+        MonthCard,
+        /// <summary>
+        /// 全通次卡
+        /// </summary>
+        AllCountCard,
+        /// <summary>
+        /// 全通月卡
+        /// </summary>
+        AllMonthCard
 
-	}//end EnumUserLevel
+    }//end EnumUserLevel
 
 }//end namespace Jango.Lab.Models

@@ -1,0 +1,287 @@
+body,html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    font-family: "Microsoft Sans Serif",arial,"Microsoft YaHei";
+    -webkit-text-size-adjust:none;
+    background-color: #f5f4f4;
+}
+body,ul,ol,h3,h4,p{
+    margin: 0;
+    padding: 0;
+}
+ul li{  list-style-type: none;  }
+a{  text-decoration: none;  }
+.clearfix:after { content: ".";display: block;height: 0;clear: both;visibility: hidden; }
+.clearfix {zoom:1;}
+.w100{  width: 100%;  }
+.fs20{  font-size: 0.2rem;  }
+.fs22{  font-size: 0.22rem;  }
+.fs24{  font-size: 0.24rem;  }
+.fs28{  font-size: 0.28rem;  }
+.fs30{  font-size: 0.3rem;  }
+.cfff{  color: #fff;  }
+.c878{  color: #878585;  }
+.ceb0{  color: #eb050f;  }
+.pr{  position: relative;  }
+.pa{  position: absolute;  }
+.fl{  float: left;  }
+.fr{  float: right;  }
+.tc{  text-align: center;  }
+.tr{  text-align: right;  }
+.dpb{  display: block;  }
+.dpib{  display: inline-block;  }
+.mt40{  margin-top: 0.4rem;  }
+.cc{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+/*注册界面*/
+#register .logo_bg{
+    width: 100%;
+    height: 4rem;
+    position: relative;
+}
+#register .logo_bg .logo_img{
+    width: 3rem;
+    height: 3rem;
+    background: url("../images/logo.png");
+    background-size: 3rem 3rem;
+}
+#register .main .box{
+    height: 1rem;
+    padding-left: 0.3rem;
+    background-color: #fff;
+}
+#register .main .box .bot_line{
+    border-bottom: 1px solid #dbdbdb;
+}
+#register .main .box .data{
+    width: 100%;
+    height: 0.4rem;
+    padding: 0.3rem;
+}
+#register .main .box .data .left{
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding-right: 0.4rem;
+    border-right: 1px solid #dbdbdb;
+}
+#register .main .box .data .right{
+    width: 2.4rem;
+    height: 0.4rem;
+    padding: 0 0.3rem;
+}
+#register .main .box .data .right input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline-style: none;
+}
+#register .main .box .data .get_yzm{
+    width: 1.6rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    background-color: #eb050f;
+    position: absolute;
+    top: 50%;
+    right: 0.3rem;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+}
+#register .main .agreement{
+    padding: 0.2rem 0 0.2rem 0.6rem;
+}
+#register .main .next{
+    display: block;
+    width: 6.8rem;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    border-radius: 5px;
+    background-color: #eb050f;
+    margin: 0.6rem auto 0;
+}
+/*商品列表界面*/
+#product{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+#product .leftpart{
+    width: 2rem;
+    height: 100%;
+    border-right: 1px solid #f0eded;
+    margin-left: -1px;
+    overflow: scroll;
+}
+#product .leftpart ul{
+    padding-bottom: 0.85rem;
+}
+#product .leftpart ul li{
+    width: 100%;
+    height: 1.9rem;
+    border-bottom: 1px solid #f0eded;
+}
+#product .leftpart ul li .icon-yongcan{
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+    color: #cfebd2;
+}
+#product .leftpart ul .active .icon-yongcan{
+    color: #3eb04d;
+}
+#product .rightpart{
+    width: 5.5rem;
+    height: 100%;
+    overflow: scroll;
+}
+#product .rightpart ul{
+    padding-bottom: 0.85rem;
+}
+#product .rightpart li .title{
+    padding-left: 0.2rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    background-color: #f7f7f7;
+}
+#product .rightpart li .box{
+    padding: 0.4rem 0.25rem;
+    height: 1.2rem;
+    border-bottom: 1px solid #f0eded;
+}
+#product .rightpart li .box .img1{
+    width: 1.4rem;
+    height: 1.2rem;
+}
+#product .rightpart li .box .text{
+    width: 2.8rem;
+    padding: 0 0.4rem;
+}
+#product .rightpart li .box .text h3{
+    height: 0.3rem;
+}
+#product .rightpart li .box .text p{
+    height: 0.6rem;
+    line-height: 0.3rem;
+}
+#product .rightpart li .box .text span{
+    height: 0.3rem;
+}
+#product .rightpart li .box .img2{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    right: 0.25rem;
+    bottom: 0.4rem;
+}
+#product .order{
+    width: 100%;
+    height: 0.85rem;
+    border-top: 1px solid #f0eded;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+}
+#product .order .left{
+    width: 3.3rem;
+    padding-left: 1.7rem;
+    height: 100%;
+    line-height: 0.85rem;
+    background-color: #fff;
+}
+#product .order .shop{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: #3eb04d;
+    position: absolute;
+    left: 0.3rem;
+    bottom: 0.2rem;
+}
+#product .order .shop .icon-gouwuche{
+    font-size: 0.8rem;
+    color: #fff;
+}
+#product .order .right{
+    width: 2.5rem;
+    height: 100%;
+    line-height: 0.85rem;
+    background-color: #f7a009;
+}
+#product .shop_order{
+    display: none;
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 0.85rem;
+    z-index: 9;
+}
+#product .shop_order .title{
+    width: 100%;
+    height:0.8rem;
+    background-color: #f1f1f1;
+}
+#product .shop_order .title span{
+    padding-left: 0.2rem;
+    border-left: 1px solid #3eb04d;
+    position: absolute;
+    left: 0.2rem;
+    top: 50%;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+}
+#product .shop_order .title .sc{
+    color: #acabab;
+    position: absolute;
+    right: 0.2rem;
+    top: 50%;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+}
+#product .shop_order .sc img{
+    height: 0.24rem;
+    margin-right: 0.1rem;
+}
+#product .shop_order li{
+    height: 0.9rem;
+    padding: 0 0.2rem;
+    border-bottom: 1px solid #f0eded;
+}
+#product .shop_order li p{
+    width: 5.5rem;
+    height: 0.9rem;
+    line-height: 0.9rem;
+}
+#product .shop_order li .add{
+    position: absolute;
+    top: 50%;
+    right: 0.2rem;
+    transform: translate(0,-50%);
+}
+#product .shop_order li .add img{
+    width: 0.35rem;
+    height: 0.35rem;
+}
+#product .shop_order li .add span{
+    height: 0.35rem;
+    line-height: 0.4rem;
+    margin: 0 0.2rem;
+}

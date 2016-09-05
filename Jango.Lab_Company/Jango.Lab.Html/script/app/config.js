@@ -7,9 +7,9 @@
 define(function() {
     return{
         config:{
-            base:"",
+            base:"http://localhost:8030/api/",
             interface:{
-                
+                courselist:"courses",
             }
         }
     }

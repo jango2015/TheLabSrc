@@ -12,13 +12,19 @@ namespace Jango.Lab.Services
     public class UserService : IUserService
     {
         private readonly IUserRep _userRep;
-        //private readonly ILabUow _uow;
+        private readonly ILabUow _uow;
         public UserService(IUserRep userRep
-            //, ILabUow uow
+            , ILabUow uow
             )
         {
             _userRep = userRep;
-            //_uow = uow;
+            _uow = uow;
+        }
+
+        public User GetById(long id)
+        {
+            if (id == 0) return new User();
+            return _userRep.GetById(id);
         }
 
         public IEnumerable<User> GetUserList()
@@ -26,11 +32,29 @@ namespace Jango.Lab.Services
             var users = _userRep.GetAllList();
             return users;
         }
+
+        public void Save(User model)
+        {
+            model.ModifiedAt = DateTime.Now;
+            if (model.ID == 0)
+            {
+                model.CreatedAt = DateTime.Now;
+                _userRep.Add(model);
+            }
+            else
+            {
+                _userRep.Update(model);
+            }
+            _uow.Commit();
+        }
     }
 
     public interface IUserService
     {
         IEnumerable<User> GetUserList();
 
+        User GetById(long id);
+
+        void Save(User model);
     }
 }
