@@ -17,15 +17,12 @@ namespace Jango.Lab.API.Controllers
         {
             _userSrv = userSrv;
         }
-        public IEnumerable<User> Get(UserQuery query)
-        {
-            return _userSrv.GetUserList(query);
-        }
 
-
-        public string Get(int id)
+        [Route("~/api/users/getbymobile")]
+        [HttpGet]
+        public User GetbyMobile([FromUri]string mobile)
         {
-            return "value";
+            return _userSrv.GetByMobile(mobile);
         }
 
 

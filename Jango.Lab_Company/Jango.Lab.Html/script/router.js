@@ -1,5 +1,5 @@
 /**
- * created by jangocheng on 2016-09-02 14:10:25
+ * created by jangocheng on 2016-09-02
  * 
  */
 define([
@@ -12,13 +12,22 @@ define([
     var Router = Backbone.Router.extend({
         routes:{
             '(!/)':'blogs',
-            '(!/)blogs/:id':'detail'
+            '(!/)blogs/:id':'detail',
+            'revisedata':'revisedata'
         },
         blogs:function(){
             require([
-                'view/EProductsInDeviceView'
-            ],function(productView){
-                var view = new productView();
+                'view/UserView'
+            ],function(UserView){
+                var view = new UserView();
+            });
+        },
+        revisedata:function(){
+            require([
+                'view/Revisedataview'
+                ,'csls'
+            ],function(UserView,util){
+                var view = new UserView();
             });
         }
     });

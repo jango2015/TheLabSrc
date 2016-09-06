@@ -13,6 +13,7 @@ namespace Jango.Lab.Services
 {
     public class UserService : IUserService
     {
+        #region ctor
         private readonly IUserRep _userRep;
         private readonly ILabUow _uow;
         public UserService(IUserRep userRep
@@ -22,7 +23,9 @@ namespace Jango.Lab.Services
             _userRep = userRep;
             _uow = uow;
         }
+        #endregion
 
+        #region bg
         public User GetById(long id)
         {
             if (id == 0) return new User();
@@ -49,6 +52,25 @@ namespace Jango.Lab.Services
             }
             _uow.Commit();
         }
+        #endregion
+
+        #region api
+
+
+        public User GetByMobile(string mobile)
+        {
+            if (string.IsNullOrEmpty(mobile)) return new User();
+            return _userRep.FindBy(x => x.Mobile == mobile).FirstOrDefault();
+        }
+
+        public User GetByOpenId(string openid)
+        {
+            if (string.IsNullOrEmpty(openid)) return new User();
+            return _userRep.FindBy(x => x.OpenID == openid).FirstOrDefault();
+        }
+
+        #endregion
+
     }
 
     public interface IUserService
@@ -58,5 +80,14 @@ namespace Jango.Lab.Services
         User GetById(long id);
 
         void Save(User model);
+
+
+        /*
+         * 
+         * api
+         * 
+         */
+        User GetByMobile(string mobile);
+        User GetByOpenId(string openid);
     }
 }

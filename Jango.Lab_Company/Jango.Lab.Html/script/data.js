@@ -1,14 +1,20 @@
 /**
- * created by jangocheng on 2016-09-02 14:10:25
+ * created by jangocheng on 2016-09-02
  * 
  */
 require.config({
-    baseUrl:'scripts',
+    baseUrl:'script',
     paths:{
-         jquery:'vendor/zepto.1.2.min',
-         backbone:'vendor/backbone.1.3.3.min',
-         underscore:'vendor/underscore.1.8.3.min',
-         then:'vendor/then.min'
+         jquery:'plugins/zepto.1.2.min',
+         backbone:'plugins/backbone.1.3.3.min',
+         underscore:'plugins/underscore.1.8.3.min',
+         then:'plugins/then.min',
+         csls:['css!../../style.css','css!../../css/style2.css','css!../../style3.css'],
+    },
+    map:{
+        '*':{
+          'css':'plugins/css'
+        }
     },
     shim:{
          

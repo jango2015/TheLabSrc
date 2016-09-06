@@ -1,15 +1,19 @@
 /**
- * created by jango 2016-09-02 14:03:56
+ * created by jango 2016-09-02
  * 
  * 
  */
 
-define(function() {
+define(
+    ['app/baseApi']
+    ,
+    function(base) {
     return{
-        config:{
-            base:"http://localhost:8030/api/",
+        lab:{
             interface:{
-                courselist:"courses",
+                courselist:base+"courses",
+                userInfobymobile:base+'users/getbymobile',
+
             }
         }
     }
