@@ -1,6 +1,8 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
+using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +33,9 @@ namespace Jango.Lab.Services
             }
         }
 
-        public IEnumerable<Coacher> GetAllList()
+        public IPagedList<Coacher> GetAllList(CoacherQuery query)
         {
-            return _coacherRep.GetAllList();
+            return _coacherRep.GetAllList().AsPagedList(query);
         }
 
         public Coacher GetById(long id)
@@ -76,7 +78,7 @@ namespace Jango.Lab.Services
 
     public interface ICoacherService
     {
-        IEnumerable<Coacher> GetAllList();
+        IPagedList<Coacher> GetAllList(CoacherQuery query);
 
         Coacher GetById(long id);
 

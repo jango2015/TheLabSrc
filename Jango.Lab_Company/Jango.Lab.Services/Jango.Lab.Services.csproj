@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jango.Lib.CastleWindsor.MVC">
+      <HintPath>..\Lib\Jango.Lib.CastleWindsor.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="Jango.Lib.Repository.Core">
       <HintPath>..\Lib\Jango.Lib.Repository.Core.dll</HintPath>
     </Reference>
@@ -46,6 +49,8 @@
     <Compile Include="CoacherService.cs" />
     <Compile Include="CourseInfoService.cs" />
     <Compile Include="CourseReserveService.cs" />
+    <Compile Include="LogService.cs" />
+    <Compile Include="MessageService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserService.cs" />

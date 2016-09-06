@@ -1,4 +1,5 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Services;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace Jango.Lab.API.Controllers
         {
             _userSrv = userSrv;
         }
-        public IEnumerable<User> Get()
+        public IEnumerable<User> Get(UserQuery query)
         {
-            return _userSrv.GetUserList();
+            return _userSrv.GetUserList(query);
         }
 
 

@@ -18,7 +18,7 @@ namespace Jango.Lab.API.Controllers
         }
         public IEnumerable<CourseInfo> Get()
         {
-            var items = _courseSrv.GetCourseList();
+            var items = _courseSrv.GetCourseList(new Models.Query.CourseQuery() { PageSize = 20 });
             return items;
         }
 

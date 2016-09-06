@@ -1,6 +1,8 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
+using Jango.Lib.CastleWindsor.MVC.Extensions;
 using Jango.Lib.Repository.Core;
 using System;
 using System.Collections.Generic;
@@ -25,14 +27,14 @@ namespace Jango.Lab.Services
             _courseInfoRep = courseInfoRep;
             _uow = uow;
         }
-        public IEnumerable<CourseCategory> GetCourseCategoryList()
+        public IPagedList<CourseCategory> GetCourseCategoryList(CourseCategoryQuery query)
         {
-            return _courseCategoryRep.GetAllList();
+            return _courseCategoryRep.GetAllList().AsPagedList(query);
         }
 
-        public IEnumerable<CourseInfo> GetCourseList()
+        public IPagedList<CourseInfo> GetCourseList(CourseQuery query)
         {
-            return _courseInfoRep.GetAllList();
+            return _courseInfoRep.GetAllList().AsPagedList(query);
         }
 
         public CourseCategory GetById(long id)
@@ -99,7 +101,7 @@ namespace Jango.Lab.Services
 
     public interface ICourseInfoService
     {
-        IEnumerable<CourseCategory> GetCourseCategoryList();
+        IPagedList<CourseCategory> GetCourseCategoryList(CourseCategoryQuery query);
 
         CourseCategory GetById(long id);
 
@@ -108,6 +110,6 @@ namespace Jango.Lab.Services
         CourseInfo GetCourseById(long id);
 
         void SaveCourse(CourseInfo model);
-        IEnumerable<CourseInfo> GetCourseList();
+        IPagedList<CourseInfo> GetCourseList(CourseQuery query);
     }
 }

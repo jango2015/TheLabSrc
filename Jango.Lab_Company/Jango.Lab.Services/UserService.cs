@@ -1,6 +1,8 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
+using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +29,9 @@ namespace Jango.Lab.Services
             return _userRep.GetById(id);
         }
 
-        public IEnumerable<User> GetUserList()
+        public IPagedList<User> GetUserList(UserQuery query)
         {
-            var users = _userRep.GetAllList();
+            var users = _userRep.GetAllList().AsPagedList(query);
             return users;
         }
 
@@ -51,7 +53,7 @@ namespace Jango.Lab.Services
 
     public interface IUserService
     {
-        IEnumerable<User> GetUserList();
+        IPagedList<User> GetUserList(UserQuery query);
 
         User GetById(long id);
 

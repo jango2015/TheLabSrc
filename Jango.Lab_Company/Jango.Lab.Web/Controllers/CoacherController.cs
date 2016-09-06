@@ -1,4 +1,5 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Services;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace Jango.Lab.Web.Controllers
         {
             _coacherSrv = coacherSrv;
         }
-        public ActionResult Index()
+        public ActionResult Index(CoacherQuery query)
         {
-            var items = _coacherSrv.GetAllList();
+            var items = _coacherSrv.GetAllList(query);
             return View(items);
         }
 

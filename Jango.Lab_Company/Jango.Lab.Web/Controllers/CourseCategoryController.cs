@@ -1,4 +1,5 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Services;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace Jango.Lab.Web.Controllers
             _courseInfoSrv = courseInfoSrv;
         }
         // GET: CourseCategory
-        public ActionResult Index()
+        public ActionResult Index(CourseCategoryQuery query)
         {
-            var categories = _courseInfoSrv.GetCourseCategoryList();
+            var categories = _courseInfoSrv.GetCourseCategoryList(query);
             return View(categories);
         }
 

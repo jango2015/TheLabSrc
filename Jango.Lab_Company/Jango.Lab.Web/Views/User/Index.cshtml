@@ -1,9 +1,9 @@
-﻿
+﻿@using Jango.Lib.CastleWindsor.MVC.Extensions;
 @{
     ViewBag.Title = "会员管理";
     Layout = "~/Views/_LayoutView.cshtml";
 }
-@model IEnumerable<Jango.Lab.Models.User>
+@model IPagedList<Jango.Lab.Models.User>
 <h2>@ViewBag.Title</h2>
 
 <div class=" search">
@@ -72,7 +72,7 @@
         <tfoot>
             <tr>
                 <td colspan="9">
-                    <nav>
+                    @*<nav>
                         <ul class="pagination">
                             <li>
                                 <a href="#" aria-label="Previous">
@@ -90,7 +90,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav>*@
+                    @if (Model != null)
+                    {
+                        @Html.Pagination(Model.TotalItemCount, Model.CurrentPageIndex, Model.PageSize)
+                    }
                 </td>
             </tr>
         </tfoot>

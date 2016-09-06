@@ -16,7 +16,7 @@ using System.IO;
 namespace Jango.Lab.Models {
 	public enum EnumMessageType  {
 
-		Templatel,
+		Template,
 		SMS
 
 	}//end EnumMessageType

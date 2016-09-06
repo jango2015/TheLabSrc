@@ -1,4 +1,5 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Query;
 using Jango.Lab.Services;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace Jango.Lab.Web.Controllers
         }
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(UserQuery query)
         {
-            var users = _userSrv.GetUserList();
+            var users = _userSrv.GetUserList(query);
             return View(users);
         }
 

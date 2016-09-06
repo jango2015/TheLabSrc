@@ -43,5 +43,5 @@ namespace Jango.Lab.Models
 
 
     }//end User
-
+    
 }//end namespace Jango.Lab.Models

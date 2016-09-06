@@ -51,6 +51,9 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Jango.Lib.CastleWindsor.MVC">
+      <HintPath>..\Lib\Jango.Lib.CastleWindsor.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="Jango.Lib.CastleWindsor.WebAPI">
       <HintPath>..\Lib\Jango.Lib.CastleWindsor.WebAPI.dll</HintPath>
     </Reference>
