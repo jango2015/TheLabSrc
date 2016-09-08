@@ -35,13 +35,16 @@ namespace Jango.Lab.Models
         public string Name { get; set; }
         [MaxLength(50)]
         public string OpenID { get; set; }
-        [NotMapped]
         [MaxLength(50)]
         public string Code { get; set; }
+        [NotMapped]
         public UserAccount[] m_UserAccounts { get; set; }
+        [NotMapped]
         public UserConsigneeInfo m_UserConsigneeInfo { get; set; }
-        public EnumUserLevel m_EnumUserLevel { get; set; }
-        public ChargeRecord m_ChargeRecord { get; set; }
+        //public EnumUserLevel m_EnumUserLevel { get; set; }
+        [NotMapped]
+        public ChargeCard m_ChargeRecord { get; set; }
+        [NotMapped]
         public CourseReserveRecord m_CourseReserveRecord { get; set; }
 
 

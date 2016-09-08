@@ -19,6 +19,7 @@ namespace Jango.Lab.Wechat
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MapperStrapper.ConfigureAutoMapper();
             BootStrapper.InstallBootStrapperContainer(Classes.FromThisAssembly(), new List<string>() { "Jango.Lab.Models", "Jango.Lab.Services", "Jango.Lab.Repositories" });
         }
 

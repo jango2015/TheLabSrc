@@ -1,6 +1,6 @@
 ﻿using Jango.Lab.Models;
-using Jango.Lab.Models.Query;
 using Jango.Lab.Services;
+using Jango.Lab.ViewModels.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;

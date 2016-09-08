@@ -104,6 +104,12 @@
 
     <script src="@Url.Content("~/scripts/bootstrap-datetimepicker.min.js")"></script>
     <script type="text/javascript">
-        $(".form_datetime").datetimepicker({ "todayBtn": true, format: 'yyyy-mm-dd  hh:ii' });
+        $(".form_datetime").datetimepicker({
+            format: 'yyyy-mm-dd  hh:ii',
+            startDate: "2016-01-01",
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: true,
+        });
     </script>
 }

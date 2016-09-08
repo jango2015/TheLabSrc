@@ -1,8 +1,8 @@
 ﻿using Jango.Lab.Models;
-using Jango.Lab.Models.Exceptions;
-using Jango.Lab.Models.Query;
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
+using Jango.Lab.ViewModels;
+using Jango.Lab.ViewModels.Query;
 using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;
@@ -48,12 +48,19 @@ namespace Jango.Lab.Services
             model.ModifiedAt = DateTime.Now;
             if (model.ID == 0)
             {
+                model.Code = Guid.NewGuid().ToString().Replace("-", ""); /*Convert.ToBase64String(Encoding.UTF8.GetBytes(model.Mobile))*/;
                 model.CreatedAt = DateTime.Now;
                 _userRep.Add(model);
             }
             else
             {
-                _userRep.Update(model);
+                var item = _userRep.GetById(model.ID);
+                item.Name = model.Name;
+                item.Mobile = model.Mobile;
+                item.Email = model.Email;
+                item.Level = model.Level;
+                item.Birthday = model.Birthday;
+                _userRep.Update(item);
             }
             _uow.Commit();
         }
@@ -65,13 +72,26 @@ namespace Jango.Lab.Services
         public User GetByMobile(string mobile)
         {
             if (string.IsNullOrEmpty(mobile)) return new User();
-            return _userRep.FindBy(x => x.Mobile == mobile).FirstOrDefault();
+            return _userRep.Get(x => x.Mobile == mobile);
         }
 
         public User GetByOpenId(string openid)
         {
             if (string.IsNullOrEmpty(openid)) return new User();
-            return _userRep.FindBy(x => x.OpenID == openid).FirstOrDefault();
+            return _userRep.Get(x => x.OpenID == openid);
+        }
+
+        public User GetByCode(string code)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(code)) return new User();
+                return _userRep.Get(x => x.Code == code);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion
@@ -89,10 +109,12 @@ namespace Jango.Lab.Services
 
         /*
          * 
-         * api
+         * app
          * 
          */
         User GetByMobile(string mobile);
         User GetByOpenId(string openid);
+
+        User GetByCode(string code);
     }
 }

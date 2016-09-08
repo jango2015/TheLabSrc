@@ -5,7 +5,6 @@
 <head>
     <title>课程列表</title>
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../icon_course/iconfont.css">
 </head>
 <body>
@@ -16,81 +15,55 @@
                 <button class="on">全部</button>
                 <button>课程</button>
                 <button>活动</button>
-            </div>
+            </div><input type="hidden" id="hidCode" value="@ViewBag.Code" />
         </header>
         <div class="content">
             <div class="dashed"></div>
             <div class="zzc"></div>
-            <ul>
-                <li class="pr fs14">
-                    <p class="list_h">
-                        <span>Monday</span>
-                        <span class="ml10">2016/08/15</span>
-                    </p>
-                    <div class="spots pa"><div></div></div>
-                    <div class="box clearfix pr">
-                        <img src="../images/course02.jpg" class="h100 img fl" alt="">
-                        <div class="fl ml10">
-                            <span class="dpb">The Mushrooms Risotto</span>
-                            <span class="dpb c5c5">意式蘑菇炖汤</span>
-                            <div class="clearfix mt10">
-                                <div class="avatar fl"></div>
-                                <span class="fl">Candy</span>
-                            </div>
-                            <div class="yy">
-                                <div class="yy_top w100 h50 tc">300元</div>
-                                <div class="yy_bot tc fs12">
-                                    <span class="iconfont icon-fuwuyuyue c43c"></span>
-                                    <p class="c43c">已预约</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box clearfix pr mt10">
-                        <img src="../images/course02.jpg" class="h100 img fl" alt="">
-                        <div class="fl ml10">
-                            <span class="dpb">The Mushrooms Risotto</span>
-                            <span class="dpb c5c5">意式蘑菇炖汤</span>
-                            <div class="clearfix mt10">
-                                <div class="avatar fl"></div>
-                                <span class="fl">Candy</span>
-                            </div>
-                            <div class="yy">
-                                <div class="yy_top w100 h50 tc">300元</div>
-                                <div class="yy_bot tc fs12">
-                                    <span class="iconfont icon-fuwuyuyue"></span>
-                                    <p>预约</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="pr fs14">
-                    <p class="list_h">
-                        <span>Monday</span>
-                        <span class="ml10">2016/08/15</span>
-                    </p>
-                    <div class="spots pa"><div></div></div>
-                    <div class="box clearfix pr">
-                        <img src="../images/active01.jpg" class="h100 img fl" alt="">
-                        <div class="fl ml10">
-                            <span class="dpb">The Mushrooms Risotto</span>
-                            <span class="dpb c5c5">意式蘑菇炖汤</span>
-                            <div class="clearfix mt10">
-                                <div class="avatar fl"></div>
-                                <span class="fl">Candy</span>
-                            </div>
-                            <div class="yy">
-                                <div class="yy_top w100 h50 tc">300元</div>
-                                <div class="yy_bot tc fs12">
-                                    <span class="iconfont icon-fuwuyuyue"></span>
-                                    <p>预约</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+            <ul class="items"></ul>
         </div>
     </div>
 </body>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var code = $("#hidCode").val();
+            $.get("/course/getcourselist?code=" + code, function (res) {
+                console.log(res);
+                if (res.success) {
+                    console.log(res.data);
+                    var courseItems = res.data.CourseItems;
+                    if (res.data && courseItems) {
+                        var __p = "";
+                        console.log(courseItems.length);
+                        for (var i = 0; i < courseItems.length; i++) {
+                            var itemdata = courseItems[i];
+                            __p += ' <li class="pr fs14"><p class="list_h"><span>周' + itemdata.week + '</span><span class="ml10">' + itemdata.date +
+                            '</span></p><div class="spots pa"><div></div></div>'
+                            for (var j = 0; j < itemdata.items.length; j++) {
+                                var ite = itemdata.items[j];
+                                __p += '<div class="box clearfix pr">' +
+                                    '<img src="../images/course02.jpg" class="h100 img fl" alt="">' +
+                                    '<div class="fl ml10">' +
+                                        '<span class="dpb">' + ite.Title + '</span>' +
+                                        '<span class="dpb c5c5">' + ite.Desc + '</span>' +
+                                '<div class="clearfix mt10">' +
+                                '    <div class="avatar fl"></div>' +
+                                '    <span class="fl">Candy</span></div>' +
+                               ' <div class="yy">' +
+                                   ' <div class="yy_top w100 h50 tc">' + (parseInt(ite.BalanceUse) + parseInt(ite.IntegralUse)) + '元</div>' +
+                                    '<div class="yy_bot tc fs12">' +
+                                     '   <span class="iconfont icon-fuwuyuyue c43c"></span>' +
+                                       ' <p class="c43c">已预约</p>' +
+                                    '</div> </div></div></div>';
+                            }
+                            __p += '</li>';
+                        }
+                        console.log(__p);
+                        $(".items").append(__p);
+                    }
+                }
+            })
+        })
+    </script>
+}

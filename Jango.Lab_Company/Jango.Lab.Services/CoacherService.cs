@@ -1,7 +1,7 @@
 ﻿using Jango.Lab.Models;
-using Jango.Lab.Models.Query;
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
+using Jango.Lab.ViewModels.Query;
 using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;

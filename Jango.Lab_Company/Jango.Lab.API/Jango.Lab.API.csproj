@@ -51,6 +51,10 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Jango.Lib.CastleWindsor.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Jango.Lib.CastleWindsor.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="Jango.Lib.CastleWindsor.WebAPI">
       <HintPath>..\Lib\Jango.Lib.CastleWindsor.WebAPI.dll</HintPath>
     </Reference>
@@ -172,6 +176,10 @@
     <ProjectReference Include="..\Jango.Lab.Services\Jango.Lab.Services.csproj">
       <Project>{f309e7e3-5541-4e45-a28c-5dceaebf96ad}</Project>
       <Name>Jango.Lab.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jango.Lab.ViewModels\Jango.Lab.ViewModels.csproj">
+      <Project>{934AF955-5144-4475-BA29-82E513229C9B}</Project>
+      <Name>Jango.Lab.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

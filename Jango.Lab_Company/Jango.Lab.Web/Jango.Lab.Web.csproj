@@ -240,6 +240,10 @@
       <Project>{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}</Project>
       <Name>Jango.Lab.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Jango.Lab.ViewModels\Jango.Lab.ViewModels.csproj">
+      <Project>{934AF955-5144-4475-BA29-82E513229C9B}</Project>
+      <Name>Jango.Lab.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -22,7 +22,6 @@ namespace Jango.Lab.Web
 
         private void Application_Error(object sender, EventArgs e)
         {
-            //处理错误信息SDK
             var lastError = Server.GetLastError();
             if (lastError != null)
             {
@@ -31,13 +30,10 @@ namespace Jango.Lab.Web
                 {
                     var httpCode = httpError.GetHttpCode().ToString();
                     var httpResutWrapper = new HttpRequestWrapper(System.Web.HttpContext.Current.Request);
-                    //判断当前请求是否为Ajax并且方式为Get
                     if (httpResutWrapper.IsAjaxRequest() && httpResutWrapper.HttpMethod.ToLower() == "post")
                     {
                         httpCode = "AjaxPost";
                     }
-                    //HttpContext.Current.Response.Redirect(string.Format("~/Errors/Error{0}", httpCode));
-                    //Server.ClearError();
                 }
             }
         }

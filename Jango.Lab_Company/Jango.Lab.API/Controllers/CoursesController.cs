@@ -1,5 +1,6 @@
 ﻿using Jango.Lab.Models;
 using Jango.Lab.Services;
+using Jango.Lab.ViewModels.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Jango.Lab.API.Controllers
         }
         public IEnumerable<CourseInfo> Get()
         {
-            var items = _courseSrv.GetCourseList(new Models.Query.CourseQuery() { PageSize = 20 });
+            var items = _courseSrv.GetCourseList(new CourseQuery() { PageSize = 20 });
             return items;
         }
 

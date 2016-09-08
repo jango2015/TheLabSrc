@@ -3,12 +3,12 @@ namespace Jango.Lab.Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialDB : DbMigration
+    public partial class InitializeDb : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.ChargeRecords",
+                "dbo.ChargeCards",
                 c => new
                     {
                         ID = c.Long(nullable: false, identity: true),
@@ -18,6 +18,21 @@ namespace Jango.Lab.Models.Migrations
                         IsValid = c.Boolean(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Remark = c.String(maxLength: 500, storeType: "nvarchar"),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.ChargeRecords",
+                c => new
+                    {
+                        ID = c.Long(nullable: false, identity: true),
+                        CardID = c.Long(nullable: false),
+                        UserID = c.Long(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CardOrderStatus = c.Int(nullable: false),
+                        PaySatus = c.Int(nullable: false),
+                        SubmitAt = c.DateTime(nullable: false, precision: 0),
+                        PaiedAt = c.DateTime(nullable: false, precision: 0),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -50,6 +65,16 @@ namespace Jango.Lab.Models.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.CourseCoachers",
+                c => new
+                    {
+                        ID = c.Long(nullable: false, identity: true),
+                        CourseID = c.Long(nullable: false),
+                        CoacherID = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.CourseInfoes",
                 c => new
                     {
@@ -61,6 +86,8 @@ namespace Jango.Lab.Models.Migrations
                         BalanceUse = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CourseType = c.Int(nullable: false),
                         m_CourseCategoryId = c.Long(nullable: false),
+                        CourseBeginTime = c.DateTime(nullable: false, precision: 0),
+                        CourseEndTime = c.DateTime(nullable: false, precision: 0),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -164,10 +191,6 @@ namespace Jango.Lab.Models.Migrations
                         PayTerm = c.Int(nullable: false),
                         SubmitAt = c.DateTime(nullable: false, precision: 0),
                         UserID = c.Long(nullable: false),
-                        m_EnumOrderStatus = c.Int(nullable: false),
-                        m_EnumPayStatus = c.Int(nullable: false),
-                        m_EnumPayTerms = c.Int(nullable: false),
-                        m_EnumDispatchStatus = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false, precision: 0),
                         CreatedUser = c.String(maxLength: 100, storeType: "nvarchar"),
                     })
@@ -214,29 +237,14 @@ namespace Jango.Lab.Models.Migrations
                         ModifiedAt = c.DateTime(nullable: false, precision: 0),
                         Name = c.String(maxLength: 100, storeType: "nvarchar"),
                         OpenID = c.String(maxLength: 50, storeType: "nvarchar"),
-                        m_EnumUserLevel = c.Int(nullable: false),
-                        m_ChargeRecord_ID = c.Long(),
-                        m_CourseReserveRecord_ID = c.Long(),
-                        m_UserConsigneeInfo_ID = c.Long(),
+                        Code = c.String(maxLength: 50, storeType: "nvarchar"),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.ChargeRecords", t => t.m_ChargeRecord_ID)
-                .ForeignKey("dbo.CourseReserveRecords", t => t.m_CourseReserveRecord_ID)
-                .ForeignKey("dbo.UserConsigneeInfoes", t => t.m_UserConsigneeInfo_ID)
-                .Index(t => t.m_ChargeRecord_ID)
-                .Index(t => t.m_CourseReserveRecord_ID)
-                .Index(t => t.m_UserConsigneeInfo_ID);
+                .PrimaryKey(t => t.ID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Users", "m_UserConsigneeInfo_ID", "dbo.UserConsigneeInfoes");
-            DropForeignKey("dbo.Users", "m_CourseReserveRecord_ID", "dbo.CourseReserveRecords");
-            DropForeignKey("dbo.Users", "m_ChargeRecord_ID", "dbo.ChargeRecords");
-            DropIndex("dbo.Users", new[] { "m_UserConsigneeInfo_ID" });
-            DropIndex("dbo.Users", new[] { "m_CourseReserveRecord_ID" });
-            DropIndex("dbo.Users", new[] { "m_ChargeRecord_ID" });
             DropTable("dbo.Users");
             DropTable("dbo.UserConsigneeInfoes");
             DropTable("dbo.UserAccounts");
@@ -248,9 +256,11 @@ namespace Jango.Lab.Models.Migrations
             DropTable("dbo.CourseSignInRecords");
             DropTable("dbo.CourseReserveRecords");
             DropTable("dbo.CourseInfoes");
+            DropTable("dbo.CourseCoachers");
             DropTable("dbo.CourseCategories");
             DropTable("dbo.Coachers");
             DropTable("dbo.ChargeRecords");
+            DropTable("dbo.ChargeCards");
         }
     }
 }

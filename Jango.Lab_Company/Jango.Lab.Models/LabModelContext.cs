@@ -14,6 +14,7 @@ namespace Jango.Lab.Models
         {
         }
 
+        public DbSet<ChargeCard> ChargeCard { get; set; }
         public DbSet<ChargeRecord> ChargeRecords { get; set; }
         public DbSet<Coacher> Coachers { get; set; }
         public DbSet<CourseInfo> CourseInfos { get; set; }

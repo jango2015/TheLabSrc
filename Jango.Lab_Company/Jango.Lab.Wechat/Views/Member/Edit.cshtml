@@ -2,49 +2,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <head>
     <title>修改资料</title>
     <link rel="stylesheet" href="../css/style3.css">
-    <script>
-        (function(doc, win) {
-            var docEl = doc.documentElement,
-                    isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-                    dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1;
-            dpr = window.top === window.self ? dpr : 1; //被iframe引用时，禁止缩放
-            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
-            docEl.dataset.dpr = dpr;
-            var recalc = function() {
-                var width = docEl.clientWidth;
-                if (width / dpr > 750) {
-                    width = 750 * dpr;
-                }
-                docEl.dataset.width = width;
-                docEl.dataset.percent = 100 * (width / 750);
-                docEl.style.fontSize = 100 * (width / 750) + 'px';
-            };
-            recalc();
-            if (!doc.addEventListener) return;
-            win.addEventListener(resizeEvt, recalc, false);
-        })(document, window);
-    </script>
-    <script type="text/javascript" src="../Scripts/jsAddress.js"></script>
 </head>
 <body>
     <div id="revise_data">
+        <input type="hidden" id="hidCode" value="@ViewBag.Code" />
         <div class="box b_line fs24 pr">
             姓名
-            <input type="text" class="inp1">
+            <input type="text" class="inp1" name="Name">
             <img src="../images/name.png" class="img vc" alt="">
         </div>
         <div class="box b_line fs24 pr">
             手机号码
-            <input type="text" class="inp1">
+            <input type="text" class="" name="Mobile" maxlength="11">
             <img src="../images/phone.png" class="img vc" alt="">
         </div>
         <div class="box b_line fs24 pr">
             生日
-            <input type="date" value="1990-01-01" class="inp1">
+            <input type="date" value="" name="Birthday" class="inp1">
             <img src="../images/date.png" class="img vc" alt="">
         </div>
         <div class="box fs24 pr">
@@ -68,6 +45,7 @@
             选择区
             <select id="cmbArea" name="cmbProvince"></select>
         </div>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jsAddress.js")"></script>
         <script type="text/javascript">
             addressInit('cmbProvince', 'cmbCity', 'cmbArea');
         </script>
@@ -78,6 +56,91 @@
         <nav class="fs24 cfff tc">保存</nav>
     </div>
 
-    <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../Scripts/js.js"></script>
 </body>
+@section scripts{
+
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                    dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1;
+            dpr = window.top === window.self ? dpr : 1; //被iframe引用时，禁止缩放
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width / dpr > 750) {
+                    width = 750 * dpr;
+                }
+                docEl.dataset.width = width;
+                docEl.dataset.percent = 100 * (width / 750);
+                docEl.style.fontSize = 100 * (width / 750) + 'px';
+            };
+            recalc();
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+    </script>
+    <script type="text/javascript">
+        /*修改资料界面事件*/
+        $(function () {
+            $("#revise_data input[type=date]").blur(function () {
+                var text = $(this).val();
+                loadxingz(text);
+            })
+        });
+        function loadxingz(text) {
+            var month = Number(text.substr(5, 2));
+            var date = text.substr(8, 2);
+            if (month == 1 && date >= 20 || month == 2 && date <= 18) {
+                $("#revise_data .constellation").text("水瓶座")
+            }
+            if (month == 2 && date >= 19 || month == 3 && date <= 20) {
+                $("#revise_data .constellation").text("双鱼座")
+            }
+            if (month == 3 && date >= 21 || month == 4 && date <= 19) {
+                $("#revise_data .constellation").text("白羊座")
+            }
+            if (month == 4 && date >= 20 || month == 5 && date <= 20) {
+                $("#revise_data .constellation").text("金牛座")
+            }
+            if (month == 5 && date >= 21 || month == 6 && date <= 21) {
+                $("#revise_data .constellation").text("双子座")
+            }
+            if (month == 6 && date >= 22 || month == 7 && date <= 22) {
+                $("#revise_data .constellation").text("巨蟹座")
+            }
+            if (month == 7 && date >= 23 || month == 8 && date <= 22) {
+                $("#revise_data .constellation").text("狮子座")
+            }
+            if (month == 8 && date >= 23 || month == 9 && date <= 22) {
+                $("#revise_data .constellation").text("室女座")
+            }
+            if (month == 9 && date >= 23 || month == 10 && date <= 22) {
+                $("#revise_data .constellation").text("天秤座")
+            }
+            if (month == 10 && date >= 23 || month == 11 && date <= 21) {
+                $("#revise_data .constellation").text("天蝎座")
+            }
+            if (month == 11 && date >= 22 || month == 12 && date <= 21) {
+                $("#revise_data .constellation").text("人马座")
+            }
+            if (month == 12 && date >= 22 || month == 1 && date <= 19) {
+                $("#revise_data .constellation").text("摩羯座")
+            }
+        }
+        $(function () {
+            var code = $("#hidCode").val();
+            console.log(code);
+            $.get("/member/getuserinfo?code=" + code, function (res) {
+                console.log(res);
+                if (res.success) {
+                    $("[name='Name']").val(res.data.Name);
+                    $("[name='Mobile']").val(res.data.Mobile);
+                    $("[name='Birthday']").val(res.data.BirthdayStr);
+                    loadxingz(res.data.BirthdayStr);
+                }
+            });
+        })
+    </script>
+}

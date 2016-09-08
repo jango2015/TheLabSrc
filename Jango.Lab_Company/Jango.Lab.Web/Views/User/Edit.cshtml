@@ -9,7 +9,8 @@
 {
 
     <div class="form">
-        <div class="form-group"><input type="hidden" name="ID" value="@Model.ID" />
+        <div class="form-group">
+            <input type="hidden" name="ID" value="@Model.ID" />
             <label>名称</label>
             <input class="input input-control" type="text" required maxlength="100" name="Name" value="@Model.Name" />
         </div>
@@ -19,7 +20,7 @@
         </div>
         <div class="form-group">
             <label>邮箱</label>
-            <input class="input input-control" type="email"  maxlength="100" name="Email" value="@Model.Email" />
+            <input class="input input-control" type="email" maxlength="100" name="Email" value="@Model.Email" />
         </div>
         <div class="form-group">
             <label>会员等级</label>
@@ -36,7 +37,7 @@
         </div>
         <div class="form-group">
             <label>生日</label>
-            <input class="input input-control form_datetime"  type="text" readonly="readonly" maxlength="100" id="Birthday" name="Birthday" value="@Model.Birthday" />
+            <input class="input input-control form_datetime" type="text" readonly="readonly" maxlength="100" id="Birthday" name="Birthday" value="@Model.Birthday" />
         </div>
         <div class="form-group">
             <button class="btn btn-primary" type="submit">提交</button>
@@ -49,6 +50,14 @@
 
     <script src="@Url.Content("~/scripts/bootstrap-datetimepicker.min.js")"></script>
     <script type="text/javascript">
-        $(".form_datetime").datetimepicker({ "todayBtn":true, format: 'yyyy-mm-dd  hh:ii' });
+        $(".form_datetime").datetimepicker({
+            todayBtn: true,
+            format: 'yyyy-mm-dd',
+            startDate: "@Model.Birthday"??"1960-01-01",
+            autoclose: true,
+            todayHighlight: true,
+            startView: "month",
+            minView: "1",
+        });
     </script>
 }

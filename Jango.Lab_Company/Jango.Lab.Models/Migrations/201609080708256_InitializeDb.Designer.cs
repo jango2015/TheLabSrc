@@ -7,13 +7,13 @@ namespace Jango.Lab.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class courseTime : IMigrationMetadata
+    public sealed partial class InitializeDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(courseTime));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitializeDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609050948472_courseTime"; }
+            get { return "201609080708256_InitializeDb"; }
         }
         
         string IMigrationMetadata.Source

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.Repositories
 {
-    public class ChargeRecordRep : LabBaseRepository<ChargeRecord>, IChargeRecordRep
+    public class ChargeRecordRep : LabBaseRepository<ChargeCard>, IChargeRecordRep
     {
         public ChargeRecordRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
         {
         }
     }
-    public interface IChargeRecordRep : IRepository<ChargeRecord>, ILabBaseRepository { }
+    public interface IChargeRecordRep : IRepository<ChargeCard>, ILabBaseRepository { }
 }

@@ -1,12 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <head>
     <title>会员中心</title>
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../icon_member/iconfont.css">
 </head>
 <body>
@@ -15,11 +12,11 @@
             <div id="member_top" class="pr cfff">
                 <div class="avatar"></div>
                 <div class="xx pa fs14 ml5">
-                    <h4 class="fw400">微信昵称</h4>
-                    <p class="mt5">我的积分：<span>8888</span></p>
-                    <p class="mt5">我的余额：<span>888</span></p>
-                </div>
-                <a href="edit" class="xg pa cfff fs16">修改<span class="iconfont icon-xiugai ml10"></span></a>
+                    <h4 class="fw400" id="Name"></h4>
+                    <p class="mt5">我的积分：<span id="Integral"></span></p>
+                    <p class="mt5">我的余额：<span id="Balance"></span></p>
+                </div><input type="hidden" id="hidCode" value="@ViewBag.Code" />
+                <a href="edit?code=@ViewBag.Code" class="xg pa cfff fs16">修改<span class="iconfont icon-xiugai ml10"></span></a>
                 <a href="#" class="cz pa fs16 c000 tc">充值</a>
             </div>
             <div id="member_tabs" class="clearfix">
@@ -360,6 +357,61 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../Scripts/js.js"></script>
 </body>
+@section scripts{
+    <script type="text/javascript">
+        /*会员中心界面事件*/
+        $(function () {
+            $("#member_tabs .order").on("click", function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $("#tabs_ct .order_ct").css("display", "block");
+                $("#tabs_ct .history_ct").css("display", "none");
+                $("#tabs_ct .appointment_ct").css("display", "none");
+            });
+            $("#member_tabs .appointment").on("click", function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $("#tabs_ct .appointment_ct").css("display", "block");
+                $("#tabs_ct .order_ct").css("display", "none");
+                $("#tabs_ct .history_ct").css("display", "none");
+            });
+            $("#member_tabs .history").on("click", function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $("#tabs_ct .history_ct").css("display", "block");
+                $("#tabs_ct .order_ct").css("display", "none");
+                $("#tabs_ct .appointment_ct").css("display", "none");
+            });
+            $("#tabs_ct .order_ct .order_ct_tabs .order_obligations").on("click", function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_obligations_ct").css("display", "block");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_unfinished_ct").css("display", "none");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_history_ct").css("display", "none");
+            });
+            $("#tabs_ct .order_ct .order_ct_tabs .order_unfinished").on("click", function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_unfinished_ct").css("display", "block");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_obligations_ct").css("display", "none");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_history_ct").css("display", "none");
+            });
+            $("#tabs_ct .order_ct .order_ct_tabs .order_history").on("click", function () {
+                $(this).addClass("on").siblings().removeClass("on");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_history_ct").css("display", "block");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_obligations_ct").css("display", "none");
+                $("#tabs_ct .order_ct .order_ct_tabs_ct .order_unfinished_ct").css("display", "none");
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var code = $("#hidCode").val();
+            $.get("/member/getuserinfo?code=" + code, function (res) {
+                console.log(res);
+                if (res.success) {
+                    $("#Name").text(res.data.Name);
+                    $("#Integral").text(res.data.Integral);
+                    $("#Balance").text(res.data.Balance);
+                }
+            })
+        })
+    </script>
+}

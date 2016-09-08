@@ -37,10 +37,7 @@ namespace Jango.Lab.Models
         public EnumPayTerms PayTerm { get; set; }
         public DateTime SubmitAt { get; set; }
         public long UserID { get; set; }
-        public EnumOrderStatus m_EnumOrderStatus { get; set; }
-        public EnumPayStatus m_EnumPayStatus { get; set; }
-        public EnumPayTerms m_EnumPayTerms { get; set; }
-        public EnumDispatchStatus m_EnumDispatchStatus { get; set; }
+        [NotMapped]
         public OrderItem[] m_OrderItem { get; set; }
 
         public DateTime CreatedAt { get; set; }
