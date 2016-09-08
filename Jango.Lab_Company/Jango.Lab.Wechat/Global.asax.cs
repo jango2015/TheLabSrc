@@ -1,4 +1,5 @@
-﻿using Jango.Lab.Web.Infrastructure;
+﻿using Castle.MicroKernel.Registration;
+using Castle.Windsor.Installer;
 using Jango.Lib.CastleWindsor.MVC;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Jango.Lab.Wechat
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            BootStrapper.InstallBootStrapperContainer();
+            BootStrapper.InstallBootStrapperContainer(Classes.FromThisAssembly(), new List<string>() { "Jango.Lab.Models", "Jango.Lab.Services", "Jango.Lab.Repositories" });
         }
 
 

@@ -51,9 +51,6 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Jango.Lib.CastleWindsor.MVC">
-      <HintPath>..\Lib\Jango.Lib.CastleWindsor.MVC.dll</HintPath>
-    </Reference>
     <Reference Include="Jango.Lib.CastleWindsor.WebAPI">
       <HintPath>..\Lib\Jango.Lib.CastleWindsor.WebAPI.dll</HintPath>
     </Reference>
@@ -104,7 +101,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc">
-      <HintPath>..\..\..\2016.04\LLY.TakeOut.Server\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
@@ -145,7 +142,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\BootStrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using Jango.Lab.Web.Infrastructure;
+﻿using Castle.MicroKernel.Registration;
 using Jango.Lib.CastleWindsor.MVC;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace Jango.Lab.Web
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            BootStrapper.InstallBootStrapperContainer();
+            BootStrapper.InstallBootStrapperContainer(Classes.FromThisAssembly(), new List<string>() { "Jango.Lab.Models", "Jango.Lab.Services", "Jango.Lab.Repositories" });
         }
 
 

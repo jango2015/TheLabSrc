@@ -1,4 +1,4 @@
-﻿using Jango.Lab.Web.Infrastructure;
+﻿using Castle.MicroKernel.Registration;
 using Jango.Lib.CastleWindsor.WebAPI;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Jango.Lab.API
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsHanddler());
-            BootStrapper.InstallBootStrapperContainer();
+            BootStrapper.InstallBootStrapperContainer(Classes.FromThisAssembly(), new List<string>() { "Jango.Lab.Models", "Jango.Lab.Services", "Jango.Lab.Repositories" });
         }
     }
 }
