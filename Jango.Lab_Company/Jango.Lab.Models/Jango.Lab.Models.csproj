@@ -79,6 +79,7 @@
     <Compile Include="Defines\EnumPayStatus.cs" />
     <Compile Include="Defines\EnumPayTerms.cs" />
     <Compile Include="Defines\EnumUserLevel.cs" />
+    <Compile Include="Exceptions\NullEntityException.cs" />
     <Compile Include="LabModelContext.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Message.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="User.cs" />
     <Compile Include="UserAccount.cs" />
     <Compile Include="UserConsigneeInfo.cs" />
+    <Compile Include="ViewModel\MemberVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -122,6 +124,7 @@
       <DependentUpon>201609051025490_addCourseCoacher.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

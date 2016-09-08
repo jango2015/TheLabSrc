@@ -1,0 +1,72 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/css/dpl-min.css" rel="stylesheet" />
+    <link href="~/css/bui-min.css" rel="stylesheet" />
+    <link href="~/css/main-min.css" rel="stylesheet" />
+    <link href="@(Url.Content("~/css/bootstrap.min.css"))" rel="stylesheet" />
+</head>
+<body>
+    <div class="header">
+        <div class="dl-title">
+            <a href="#" title="文档库地址" target="_blank">            
+                <span class="lp-title-port"></span><span class="dl-title-text">XXXX管理系统</span>
+            </a>
+        </div>
+        <div class="dl-log">
+            欢迎您，<span class="dl-log-user">**.**inc.com</span><a href="###" title="退出系统" class="dl-log-quit">[退出]</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="dl-main-nav">
+            <div class="dl-inform">
+                <div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div>
+            </div>
+            <ul id="J_Nav" class="nav-list ks-clear">
+                <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">首页</div></li>
+            </ul>
+        </div>
+        <ul id="J_NavContent" class="dl-tab-conten">
+            <script type="text/javascript" src="~/scripts/jquery-1.9.1.min.js"></script>
+        </ul>
+    </div>
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="~/scripts/bui-min.js"></script>
+    <script type="text/javascript" src="~/scripts/config-min.js"></script>
+    <script>
+    BUI.use('main',function(){
+      var config = [{
+          id:'sys',
+          homePage: 'user',
+          menu:[{
+              text:'会员',
+              items:[
+                { id: 'user', text: '会员管理', href: '~/../user/index' },
+                //{id:'main-menu',text:'顶部导航',href:'main/menu.html'},
+                //{id:'second-menu',text:'右边菜单',href:'main/second-menu.html'},
+                //{id:'dyna-menu',text:'动态菜单',href:'main/dyna-menu.html'}
+              ]
+            },{
+              text:'教练',
+              items:[
+                { id: 'coacher', text: '教练管理', href: '~/../coacher/Index' },
+              ]
+            }, {
+                text: '课程',
+                items: [
+                  { id: 'courseCategory', text: '课程分类管理', href: '~/../courseCategory/Index' },
+                  { id: 'course', text: '课程管理', href: '~/../course/Index' }
+                ]
+            }
+          ]
+          }
+      ];
+      new PageUtil.MainPage({
+        modulesConfig : config
+      });
+    });
+    </script>
+</body>
+</html>

@@ -34,7 +34,6 @@ namespace Jango.Lab.Web.Controllers
         {
             try
             {
-
                 _userSrv.Save(model);
                 return RedirectToAction("Index");
             }

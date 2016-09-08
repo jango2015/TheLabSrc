@@ -35,6 +35,9 @@ namespace Jango.Lab.Models
         public string Name { get; set; }
         [MaxLength(50)]
         public string OpenID { get; set; }
+        [NotMapped]
+        [MaxLength(50)]
+        public string Code { get; set; }
         public UserAccount[] m_UserAccounts { get; set; }
         public UserConsigneeInfo m_UserConsigneeInfo { get; set; }
         public EnumUserLevel m_EnumUserLevel { get; set; }
@@ -43,5 +46,5 @@ namespace Jango.Lab.Models
 
 
     }//end User
-    
+
 }//end namespace Jango.Lab.Models

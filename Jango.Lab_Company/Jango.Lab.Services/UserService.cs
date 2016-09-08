@@ -1,4 +1,5 @@
 ﻿using Jango.Lab.Models;
+using Jango.Lab.Models.Exceptions;
 using Jango.Lab.Models.Query;
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
@@ -40,6 +41,10 @@ namespace Jango.Lab.Services
 
         public void Save(User model)
         {
+            if (string.IsNullOrEmpty(model.Mobile))
+            {
+                throw new NullEntityException("mobile is null");
+            }
             model.ModifiedAt = DateTime.Now;
             if (model.ID == 0)
             {

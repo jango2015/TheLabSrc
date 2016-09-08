@@ -89,6 +89,7 @@ namespace Jango.Lab.Services
                 item.IntegralUse = model.IntegralUse;
                 item.BalanceUse = model.BalanceUse;
                 item.CourseType = model.CourseType;
+                item.CoacherID = model.CoacherID;
                 //item.m_CourseCategory = model.m_CourseCategory;
                 item.m_CourseCategoryId = model.m_CourseCategoryId;
                 item.Desc = model.Desc;

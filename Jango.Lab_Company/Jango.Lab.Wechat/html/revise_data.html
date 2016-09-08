@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>修改资料</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../css/style3.css">
+    <script>
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                    isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                    dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1;
+            dpr = window.top === window.self ? dpr : 1; //被iframe引用时，禁止缩放
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var recalc = function() {
+                var width = docEl.clientWidth;
+                if (width / dpr > 750) {
+                    width = 750 * dpr;
+                }
+                docEl.dataset.width = width;
+                docEl.dataset.percent = 100 * (width / 750);
+                docEl.style.fontSize = 100 * (width / 750) + 'px';
+            };
+            recalc();
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+    </script>
+    <script type="text/javascript" src="../Scripts/jsAddress.js"></script>
+</head>
+<body>
+    <div id="revise_data">
+        <div class="box b_line fs24 pr">
+            姓名
+            <input type="text" class="inp1">
+            <img src="../images/name.png" class="img vc" alt="">
+        </div>
+        <div class="box b_line fs24 pr">
+            手机号码
+            <input type="text" class="inp1">
+            <img src="../images/phone.png" class="img vc" alt="">
+        </div>
+        <div class="box b_line fs24 pr">
+            生日
+            <input type="date" value="1990-01-01" class="inp1">
+            <img src="../images/date.png" class="img vc" alt="">
+        </div>
+        <div class="box fs24 pr">
+            星座
+            <span class="constellation"></span>
+            <img src="../images/xingzuo.png" class="img vc" alt="">
+        </div>
+        <div class="box fs24 pr mt20">
+            收货地址
+            <img src="../images/address.png" class="img vc" alt="">
+        </div>
+        <div class="box fs24 mt20">
+            选择省
+            <select id="cmbProvince" name="cmbProvince"></select>
+        </div>
+        <div class="box fs24 mt20">
+            选择市
+            <select id="cmbCity" name="cmbProvince"></select>
+        </div>
+        <div class="box fs24 mt20">
+            选择区
+            <select id="cmbArea" name="cmbProvince"></select>
+        </div>
+        <script type="text/javascript">
+            addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+        </script>
+        <div class="box2 fs24 mt20 pr">
+            <span class="fs24">详细地址：</span>
+            <textarea></textarea>
+        </div>
+        <nav class="fs24 cfff tc">保存</nav>
+    </div>
+
+    <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../Scripts/js.js"></script>
+</body>
+</html>

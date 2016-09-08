@@ -138,9 +138,35 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\bui-min.css" />
+    <Content Include="css\dpl-min.css" />
+    <Content Include="css\main-min.css" />
+    <Content Include="css\page-min.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\calendar-200-300.gif" />
+    <Content Include="img\checkbox.gif" />
+    <Content Include="img\check_icon-100-100.gif" />
+    <Content Include="img\hide_list.png" />
+    <Content Include="img\icon-806-614.png" />
+    <Content Include="img\left-slib.gif" />
+    <Content Include="img\load-16-16.gif" />
+    <Content Include="img\main-nav-bg.png" />
+    <Content Include="img\main-nav-bg1.png" />
+    <Content Include="img\menu-500-188.png" />
+    <Content Include="img\menu.jpg" />
+    <Content Include="img\nav.jpg" />
+    <Content Include="img\nav_selected.png" />
+    <Content Include="img\radio_icon-64-40.gif" />
+    <Content Include="img\resource.jpg" />
+    <Content Include="img\separator-2-340.gif" />
+    <Content Include="img\sprite-469-300.png" />
+    <Content Include="img\tab-140-120.gif" />
+    <Content Include="img\table-191-450.gif" />
+    <Content Include="img\tree.gif" />
+    <Content Include="img\tree_icon-80-100.gif" />
+    <Content Include="img\white_sprite-469-300.png" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -157,8 +183,11 @@
     <Content Include="scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\bui-min.js" />
+    <Content Include="scripts\config-min.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
+    <Content Include="scripts\main-min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +195,7 @@
     <Compile Include="Controllers\CoacherController.cs" />
     <Compile Include="Controllers\CourseCategoryController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +219,8 @@
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Coacher\Edit.cshtml" />
     <Content Include="Views\Coacher\Index.cshtml" />
+    <Content Include="Views\Shared\__LayoutMenuView.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
