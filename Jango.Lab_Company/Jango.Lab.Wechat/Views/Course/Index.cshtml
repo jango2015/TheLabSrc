@@ -4,17 +4,22 @@
 
 <head>
     <title>课程列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../icon_course/iconfont.css">
 </head>
 <body>
     <div id="course_list">
         <header class="bar bar-nav clearfix">
-            <input type="date" class="w50" value="2016-09-01" />
-            <div class="clearfix pull-right w50">
-                <button class="on">全部</button>
-                <button>课程</button>
-                <button>活动</button>
+            <input type="date" class="w50 search-date" value="@ViewBag.SearchDate" />
+            <div class="clearfix pull-right w50 tab-btns">
+                <button class="on show_p">全部</button>
+                <button class="show_cp">课程</button>
+                <button class="show_at">活动</button>
             </div><input type="hidden" id="hidCode" value="@ViewBag.Code" />
         </header>
         <div class="content">
@@ -26,43 +31,118 @@
 </body>
 @section scripts{
     <script type="text/javascript">
+        var weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
         $(function () {
             var code = $("#hidCode").val();
-            $.get("/course/getcourselist?code=" + code, function (res) {
-                console.log(res);
-                if (res.success) {
-                    console.log(res.data);
-                    var courseItems = res.data.CourseItems;
-                    if (res.data && courseItems) {
-                        var __p = "";
-                        console.log(courseItems.length);
-                        for (var i = 0; i < courseItems.length; i++) {
-                            var itemdata = courseItems[i];
-                            __p += ' <li class="pr fs14"><p class="list_h"><span>周' + itemdata.week + '</span><span class="ml10">' + itemdata.date +
-                            '</span></p><div class="spots pa"><div></div></div>'
-                            for (var j = 0; j < itemdata.items.length; j++) {
-                                var ite = itemdata.items[j];
-                                __p += '<div class="box clearfix pr">' +
-                                    '<img src="../images/course02.jpg" class="h100 img fl" alt="">' +
-                                    '<div class="fl ml10">' +
-                                        '<span class="dpb">' + ite.Title + '</span>' +
-                                        '<span class="dpb c5c5">' + ite.Desc + '</span>' +
-                                '<div class="clearfix mt10">' +
-                                '    <div class="avatar fl"></div>' +
-                                '    <span class="fl">Candy</span></div>' +
-                               ' <div class="yy">' +
-                                   ' <div class="yy_top w100 h50 tc">' + (parseInt(ite.BalanceUse) + parseInt(ite.IntegralUse)) + '元</div>' +
-                                    '<div class="yy_bot tc fs12">' +
-                                     '   <span class="iconfont icon-fuwuyuyue c43c"></span>' +
-                                       ' <p class="c43c">已预约</p>' +
-                                    '</div> </div></div></div>';
-                            }
-                            __p += '</li>';
+            var date = $(".search-date").val();
+            var __p = __cp = __at = "";
+            var url = "/course/getcourselist?code=" + code + "&searDate=";
+
+            $(".search-date").change(function () {
+                date = $(".search-date").val();
+                __p = __cp = __at = "";
+                loaddata();
+            })
+            loaddata();
+            $(".items").on("click", ".btn-reserve", function () {
+                var cid = $(this).attr("cid") || 0;
+                console.log(cid);
+                if (cid != 0) {
+                    var url = "/course/reservecourse";
+                    console.log(url);
+                    $.post(url, { code: code, courseId: cid }, function (res) {
+                        console.log(res);
+                        if (res.success) {
+                            $("coc_" + cid).find(".reserve").addClass("c43c");
+                            $("[cid='" + cid + "']").text("已预约");
                         }
-                        console.log(__p);
-                        $(".items").append(__p);
-                    }
+                    });
                 }
+            });
+            function loaddata() {
+                $(".mask").show();
+                $.get(url + date, function (res) {
+                    if (res.success) {
+                        //console.log(res.data);
+                        var courseItems = res.data.CourseItems;
+                        var courseReserveList = res.data.CourseReserveList;
+                        if (res.data && courseItems && courseItems.length > 0) {
+                            for (var i = 0; i < courseItems.length; i++) {
+                                var itemdata = courseItems[i];
+                                __p += ' <li class="pr fs14"><p class="list_h"><span>' + weeks[itemdata.week - 1] + '</span><span class="ml10">' + itemdata.date +
+                                '</span></p><div class="spots pa"><div></div></div>';
+                                __cp = __at = __p;
+                                for (var j = 0; j < itemdata.items.length; j++) {
+                                    var __t = '';
+                                    var ite = itemdata.items[j];
+                                    __t += '<div id="coc_' + ite.ID + '" class="box clearfix pr p-item  ';
+                                    if (j > 0) {
+                                        __t += 'mt10"';
+                                    }
+                                    __t += ' ">';
+                                    __t += '<img src="../images/course02.jpg" class="h100 img fl" alt="">' +
+                                     '<div class="fl ml10">' +
+                                         '<span class="dpb">' + ite.Title + '</span>' +
+                                         '<span class="dpb c5c5">' + ite.Desc + '</span>' +
+                                 '<div class="clearfix mt10">' +
+                                 '    <div class="avatar fl"></div>' +
+                                 '    <span class="fl">Candy</span></div>' +
+                                ' <div class="yy">' +
+                                    ' <div class="yy_top w100 h50 tc">' + (parseInt(ite.BalanceUse) + parseInt(ite.IntegralUse)) + '元</div>' +
+                                     '<div class="yy_bot tc fs12">' +
+                                      '<span class="iconfont icon-fuwuyuyue reserve"></span>' +
+                                      //'   <span class="iconfont icon-fuwuyuyue c43c"></span>' +
+                                        ' <p class="reserve btn-reserve" cid=' + ite.ID + '>预约</p>' +
+                                        //' <p class="c43c reserve">已预约</p>' +
+                                     '</div> </div></div></div>';
+                                    __p += __t;
+                                    if (ite.CourseType == 0) {
+                                        __cp += __t;
+                                    }
+                                    if (ite.CourseType == 1) {
+                                        __at += __t;
+                                    }
+                                }
+                                __p += '</li>';
+                                __cp += '</li>';
+                                __at += '</li>';
+                            }
+                        } else {
+                            var d = parseInt(new Date(date).getDay());
+                            __p = '<li class="pr fs14"><p class="list_h"><span>' + weeks[d] + '</span><span class="ml10">' + date + '</span></p><div class="spots pa"><div></div></div><div class="box2 clearfix pr"><h3>We have no classes today ...</h3><p class="c5c5">今天没有开课哟~</p><span class="iconfont icon-xiaolian"></span></div></li>'
+                        }
+                        console.log(courseReserveList);
+                        if (courseReserveList && courseReserveList.length > 0) {
+                            for (var b = 0; b < courseReserveList.length; b++) {
+                                var rec = courseReserveList[b];
+                                var cid = rec.CourseID;
+                                $(__p).find("reserve").addClass("c43c");
+                                $(__p).find("btn-reserve").text("已预约").removeClass("btn-reserve");
+                            }
+                        }
+                    } else {
+                        //please reload page;
+                    }
+                    $(".items").html(__p);
+                    $(".mask").hide();
+                });
+            }
+            $(".tab-btns>button").click(function () {
+                $(".tab-btns>button").removeClass("on");
+                $(this).addClass("on");
+            });
+            $(".show_p").click(function () {
+                $(".items").html(__p);
+                $(".items").find(".p-item").first().removeClass("mt10");
+            })
+            $(".show_cp").click(function () {
+                $(".items").html(__cp);
+                $(".items").find(".p-item").first().removeClass("mt10");
+            })
+            $(".show_at").click(function () {
+                $(".items").html(__at);
+                $(".items").find(".p-item").removeClass("mt10");
+                $(".items").find(".p-item").first().removeClass("mt10");
             })
         })
     </script>

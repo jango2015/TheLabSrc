@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Jango.Lab.Models;
 using Jango.Lab.Services;
 using Jango.Lab.ViewModels;
 using System;
@@ -14,6 +15,7 @@ namespace Jango.Lab.Wechat.Controllers
         public string Code = string.Empty;
         public MemberVM MemberInfo;
         private IUserService _userSrv;
+        protected  User _user;
         public BaseController(IUserService userSrv)
         {
             _userSrv = userSrv;
@@ -25,6 +27,7 @@ namespace Jango.Lab.Wechat.Controllers
                 var user = _userSrv.GetByCode(this.Code);
                 var model = Mapper.Map<MemberVM>(user);
                 MemberInfo = model;
+                _user = user;
                 this.Code = MemberInfo != null ? MemberInfo.Code : this.Code;
             }
             MemberInfo = MemberInfo == null ? new MemberVM() : MemberInfo;

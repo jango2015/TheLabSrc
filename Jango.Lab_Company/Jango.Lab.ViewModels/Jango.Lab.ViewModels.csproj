@@ -48,6 +48,7 @@
     <Compile Include="Query\CoacherQuery.cs" />
     <Compile Include="Query\CourseCategoryQuery.cs" />
     <Compile Include="Query\CourseQuery.cs" />
+    <Compile Include="Query\CourseReserveQuery.cs" />
     <Compile Include="Query\UserQuery.cs" />
     <Compile Include="ViewModel\MemberVM.cs" />
   </ItemGroup>

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.ViewModels.Query
 {
-    public class CourseQuery : PageQuery
+    public class CourseReserveQuery : PageQuery
     {
-       public DateTime? SearchDate { get; set; }
     }
 }

@@ -9,9 +9,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="telephone=no" name="format-detection">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/css")
+    @*@Styles.Render("~/css")*@
     <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
 
 </head>
 <body>
@@ -20,10 +20,14 @@
         <hr />
         <footer></footer>
     </div>
-
+    <div class="mask">
+        <div class="loading">
+            加载中...
+        </div>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-        <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="../Scripts/jquery-1.10.2.min.js"></script>
 </body>
 </html>
