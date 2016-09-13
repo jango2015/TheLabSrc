@@ -3,10 +3,9 @@
 }
 @using Jango.Lab.Models;
 @model Jango.Lab.Models.Coacher
-
 @using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST" }))
 {
-
+    <link href="@Url.Content("~/css/fileinput.min.css")" rel="stylesheet" />
     <div class="form">
         <div class="form-group">
             <input type="hidden" name="ID" value="@Model.ID" />
@@ -15,14 +14,15 @@
         </div>
         <div class="form-group">
             <label>头像</label>
-            <input class="input input-control" type="tel" required maxlength="11" name="Avatar" value="@Model.Avatar" />
+            <input id="input-2" name="Avatar" type="file" accept="image/*" class="file-loading">
+            @*<input class="input input-control" type="file" required maxlength="11" name="Avatar" value="@Model.Avatar" />*@
         </div>
         <div class="form-group">
             <label>状态</label>
             <select class="input input-control" required name="Status">
                 <option value="">--请选择--</option>
                 <option value="0" @(Model.Status == EnumCoachStatus.On ? "selected" : "")>在职</option>
-                <option value="1" @(Model.Status == EnumCoachStatus.Off? "selected" : "")>离职</option>
+                <option value="1" @(Model.Status == EnumCoachStatus.Off ? "selected" : "")>离职</option>
             </select>
         </div>
 
@@ -34,5 +34,21 @@
 
 }
 @section Scripts{
-
+    <script src="@Url.Content("~/scripts/fileinput.min.js")"></script>
+    <script>
+        $(function () {
+            $("#input-2").fileinput({
+                previewFileType: "image",
+                browseClass: "btn btn-success",
+                browseLabel: "Pick Image",
+                browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+                uploadClass: "btn btn-info",
+                uploadLabel: "Upload",
+                uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+            });
+        })
+    </script>
 }

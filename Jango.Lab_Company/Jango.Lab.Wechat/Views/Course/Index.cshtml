@@ -45,6 +45,10 @@
             })
             loaddata();
             $(".items").on("click", ".btn-reserve", function () {
+                var hs = $(this).hasClass("c43c");
+                if (hs) {
+                    return false;
+                }
                 var cid = $(this).attr("cid") || 0;
                 console.log(cid);
                 if (cid != 0) {
@@ -53,7 +57,7 @@
                     $.post(url, { code: code, courseId: cid }, function (res) {
                         console.log(res);
                         if (res.success) {
-                            $("coc_" + cid).find(".reserve").addClass("c43c");
+                            $("#coc_" + cid).find(".reserve").addClass("c43c");
                             $("[cid='" + cid + "']").text("已预约");
                         }
                     });
@@ -65,7 +69,6 @@
                     if (res.success) {
                         //console.log(res.data);
                         var courseItems = res.data.CourseItems;
-                        var courseReserveList = res.data.CourseReserveList;
                         if (res.data && courseItems && courseItems.length > 0) {
                             for (var i = 0; i < courseItems.length; i++) {
                                 var itemdata = courseItems[i];
@@ -89,12 +92,18 @@
                                  '    <span class="fl">Candy</span></div>' +
                                 ' <div class="yy">' +
                                     ' <div class="yy_top w100 h50 tc">' + (parseInt(ite.BalanceUse) + parseInt(ite.IntegralUse)) + '元</div>' +
-                                     '<div class="yy_bot tc fs12">' +
-                                      '<span class="iconfont icon-fuwuyuyue reserve"></span>' +
-                                      //'   <span class="iconfont icon-fuwuyuyue c43c"></span>' +
-                                        ' <p class="reserve btn-reserve" cid=' + ite.ID + '>预约</p>' +
+                                     '<div class="yy_bot tc fs12">';
+                                    if (ite.IsReserved) {
+                                        __t += '  <span class="iconfont icon-fuwuyuyue c43c"></span>' +
+                                          ' <p class="reserve c43c" cid=' + ite.ID + '>已预约</p>';
+                                    } else {
+                                        __t += '<span class="iconfont icon-fuwuyuyue reserve"></span>' +
+                                    //'   <span class="iconfont icon-fuwuyuyue c43c"></span>' +
+                                      ' <p class="reserve btn-reserve" cid=' + ite.ID + '>预约</p>';
                                         //' <p class="c43c reserve">已预约</p>' +
-                                     '</div> </div></div></div>';
+                                    }
+
+                                    __t += '</div> </div></div></div>';
                                     __p += __t;
                                     if (ite.CourseType == 0) {
                                         __cp += __t;
@@ -111,20 +120,13 @@
                             var d = parseInt(new Date(date).getDay());
                             __p = '<li class="pr fs14"><p class="list_h"><span>' + weeks[d] + '</span><span class="ml10">' + date + '</span></p><div class="spots pa"><div></div></div><div class="box2 clearfix pr"><h3>We have no classes today ...</h3><p class="c5c5">今天没有开课哟~</p><span class="iconfont icon-xiaolian"></span></div></li>'
                         }
-                        console.log(courseReserveList);
-                        if (courseReserveList && courseReserveList.length > 0) {
-                            for (var b = 0; b < courseReserveList.length; b++) {
-                                var rec = courseReserveList[b];
-                                var cid = rec.CourseID;
-                                $(__p).find("reserve").addClass("c43c");
-                                $(__p).find("btn-reserve").text("已预约").removeClass("btn-reserve");
-                            }
-                        }
+                        $(".items").html(__p);
+                        $(".mask").hide();
+
                     } else {
                         //please reload page;
+                        alert("系统或网络问题，请重新加载")
                     }
-                    $(".items").html(__p);
-                    $(".mask").hide();
                 });
             }
             $(".tab-btns>button").click(function () {

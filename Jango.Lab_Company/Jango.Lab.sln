@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{7350DD14-689
 		Lib\Jango.Lib.CastleWindsor.MVC.dll = Lib\Jango.Lib.CastleWindsor.MVC.dll
 		Lib\Jango.Lib.CastleWindsor.WebAPI.dll = Lib\Jango.Lib.CastleWindsor.WebAPI.dll
 		Lib\Jango.Lib.Repository.Core.dll = Lib\Jango.Lib.Repository.Core.dll
+		Lib\Jango.Lib.UploadImage.dll = Lib\Jango.Lib.UploadImage.dll
+		Lib\JuheSms.dll = Lib\JuheSms.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Wechat", "Jango.Lab.Wechat\Jango.Lab.Wechat.csproj", "{32CFF380-9908-4069-AAEF-70930C51ADA7}"

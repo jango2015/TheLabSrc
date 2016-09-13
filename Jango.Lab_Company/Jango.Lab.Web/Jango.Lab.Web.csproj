@@ -140,6 +140,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bui-min.css" />
     <Content Include="css\dpl-min.css" />
+    <Content Include="css\fileinput.min.css" />
     <Content Include="css\main-min.css" />
     <Content Include="css\page-min.css" />
     <Content Include="css\style.css" />
@@ -185,6 +186,7 @@
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\bui-min.js" />
     <Content Include="scripts\config-min.js" />
+    <Content Include="scripts\fileinput.min.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
     <Content Include="scripts\main-min.js" />
@@ -230,6 +232,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jango.Lab.Models\Jango.Lab.Models.csproj">

@@ -36,7 +36,19 @@
     <Reference Include="Jango.Lib.Repository.Core">
       <HintPath>..\Lib\Jango.Lib.Repository.Core.dll</HintPath>
     </Reference>
+    <Reference Include="JuheSms">
+      <HintPath>..\Lib\JuheSms.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LitJson.0.7.0\lib\LitJson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,6 +80,9 @@
       <Project>{934AF955-5144-4475-BA29-82E513229C9B}</Project>
       <Name>Jango.Lab.ViewModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201609080708256_InitializeDb.Designer.cs">
       <DependentUpon>201609080708256_InitializeDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609130754484_addIgnoreField.cs" />
+    <Compile Include="Migrations\201609130754484_addIgnoreField.Designer.cs">
+      <DependentUpon>201609130754484_addIgnoreField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderItem.cs" />

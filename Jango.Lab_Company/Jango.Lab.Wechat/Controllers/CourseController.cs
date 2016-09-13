@@ -11,10 +11,13 @@ namespace Jango.Lab.Wechat.Controllers
     {
         private readonly ICourseInfoService _courseInfoSrv;
         private readonly ICourseReserveService _courseReserveSrv;
+        private readonly ICoacherService _coacherSrv;
         public CourseController(IUserService userSrv, ICourseInfoService courseInfoSrv,
+            ICoacherService coacherSrv,
             ICourseReserveService courseReserveSrv) : base(userSrv)
         {
             _courseInfoSrv = courseInfoSrv;
+            _coacherSrv = coacherSrv;
             _courseReserveSrv = courseReserveSrv;
         }
 
@@ -32,6 +35,9 @@ namespace Jango.Lab.Wechat.Controllers
             try
             {
                 var courseList = _courseInfoSrv.GetCourseList(new ViewModels.Query.CourseQuery() { PageSize = int.MaxValue, SearchDate = searDate });
+                Code = code;
+                LoadMemberInfo();
+                var courseReserveList = _courseReserveSrv.GetCourseReserveListByUserId(_user.ID);
 
                 var groupCourseList = from c in courseList
                                       group c by c.CourseBeginTime.ToString("yyyy-MM-dd") into g
@@ -40,14 +46,28 @@ namespace Jango.Lab.Wechat.Controllers
                                       {
                                           date = g.Key,
                                           week = DateTime.Parse(g.Key).DayOfWeek,
-                                          items = b
+                                          items = from a in b
+                                                  select new
+                                                  {
+                                                      BalanceUse = a.BalanceUse,
+                                                      CoacherID = a.CoacherID,
+                                                      ID = a.ID,
+                                                      IntegralUse = a.IntegralUse,
+                                                      CourseBeginTimeStr = a.CourseBeginTime.ToString("HH:mm"),
+                                                      CourseEndTimeStr = a.CourseEndTime.ToString("HH:mm"),
+                                                      CourseType = a.CourseType,
+                                                      Title = a.Title,
+                                                      Desc = a.Desc,
+                                                      IsReserved = courseReserveList.Select(x => x.CourseID == a.ID).Any(),
+                                                      m_Coacher = _coacherSrv.GetById(a.CoacherID)
+                                                  }
+
+
                                       };
                 //
                 //courseReserveList
-                LoadMemberInfo();
-                var courseReserveList = _courseReserveSrv.GetCourseReserveListByUserId(_user.ID);
 
-                return Json(new { success = true, data = new { CourseItems = groupCourseList, CourseReserveList = courseReserveList } }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, data = new { CourseItems = groupCourseList } }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

@@ -42,7 +42,8 @@ namespace Jango.Lab.Models
         public long m_CourseCategoryId { get; set; }
         public DateTime CourseBeginTime { get; set; }
         public DateTime CourseEndTime { get; set; }
-
+        [NotMapped]
+        public bool IsReserved { get; set; }
     }//end CourseInfo
 
 }//end namespace Jango.Lab.Models
