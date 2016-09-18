@@ -1,5 +1,4 @@
 ﻿using Jango.Lab.Models;
-
 using Jango.Lab.Repositories.Lab;
 using Jango.Lib.Repository.Core;
 using System;
@@ -10,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.Repositories
 {
-    public class ChargeRecordRep : LabBaseRepository<ChargeRecord>, IChargeRecordRep
+    public class ChargeCardRep : LabBaseRepository<ChargeCard>, IChargeCardRep
     {
-        public ChargeRecordRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
+        public ChargeCardRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
         {
         }
     }
-    public interface IChargeRecordRep : IRepository<ChargeRecord>, ILabBaseRepository { }
+    public interface IChargeCardRep : IRepository<ChargeCard>, ILabBaseRepository { }
 }

@@ -194,10 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChargeController.cs" />
     <Compile Include="Controllers\CoacherController.cs" />
     <Compile Include="Controllers\CourseCategoryController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -222,6 +224,9 @@
     <Content Include="Views\Coacher\Index.cshtml" />
     <Content Include="Views\Shared\__LayoutMenuView.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Charge\Index.cshtml" />
+    <Content Include="Views\Charge\Record.cshtml" />
+    <Content Include="Views\Charge\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

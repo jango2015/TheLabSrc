@@ -7,13 +7,13 @@ namespace Jango.Lab.Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addIgnoreField : IMigrationMetadata
+    public sealed partial class addTradeId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addIgnoreField));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addTradeId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609130754484_addIgnoreField"; }
+            get { return "201609180629210_addTradeId"; }
         }
         
         string IMigrationMetadata.Source

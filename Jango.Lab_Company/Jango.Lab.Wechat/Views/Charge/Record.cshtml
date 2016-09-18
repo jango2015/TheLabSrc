@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Record";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>充值记录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="@Url.Content("~/css/style3.css")" />
+    <script>
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                    isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                    dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1;
+            dpr = window.top === window.self ? dpr : 1; //被iframe引用时，禁止缩放
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var recalc = function() {
+                var width = docEl.clientWidth;
+                if (width / dpr > 750) {
+                    width = 750 * dpr;
+                }
+                docEl.dataset.width = width;
+                docEl.dataset.percent = 100 * (width / 750);
+                docEl.style.fontSize = 100 * (width / 750) + 'px';
+            };
+            recalc();
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+    </script>
+</head>
+<div id="account_record">
+    <input type="hidden" id="hidCode" value="@ViewBag.Code" />
+    <ul>
+        <li>
+            <div class="w50 fl">
+                <p class="fs28">充值</p>
+                <p class="fs26">余额：49.00</p>
+            </div>
+            <div class="w50 fl tr">
+                <p class="fs28 ca6a">2015-12-30</p>
+                <p class="fs26 cff0">-49.00</p>
+            </div>
+        </li>
+
+    </ul>
+</div>
+@section scripts{
+
+    <script>
+        var code = $("#hidCode").val();
+        var reurl = "@Url.Content("~/charge/records?code=")" + code;
+        $(function () {
+            $(".mask").hide(); loadrecords();
+        })
+
+        function loadrecords() {
+            $.get(reurl, function (res) {
+                console.log(res);
+                var __p = '';
+                if (res.success) {
+                    if (res.data) {
+                        var items = res.data;
+                        for (var i = 0; i < items.length; i++) {
+                            var item = items[i];
+                            __P += ' <li><div class="w50 fl"><p class="fs28">充值</p><p class="fs26">' +
+                                '余额：' + item.CurrentAmount + '</p></div><div class="w50 fl tr"><p class="fs28 ca6a">' + item.PaiedAt + '</p><p class="fs26 cff0">+' + item.Amount + '</p></div></li>';
+                        }
+                    }
+                } else {
+                    __p += "<li></li>"
+                }
+                $("ul").append(__p);
+            })
+        }
+    </script>
+}
+

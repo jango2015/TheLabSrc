@@ -15,7 +15,9 @@ namespace Jango.Lab.Models
         public long ID { get; set; }
         public long CardID { get; set; }
         public long UserID { get; set; }
-        public decimal Price { get; set; }
+        public decimal Amount { get; set; }
+        public decimal CurrentAmount { get; set; }
+        public string tradeId { get; set; }
 
         public EnumOrderStatus CardOrderStatus { get; set; }
         public EnumPayStatus PaySatus { get; set; }

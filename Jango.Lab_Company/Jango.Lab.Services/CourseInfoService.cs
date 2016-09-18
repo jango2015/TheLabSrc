@@ -127,6 +127,16 @@ namespace Jango.Lab.Services
 
             _uow.Commit();
         }
+
+        public IQueryable<CourseInfo> GetCoursesByIds(List<long> ids)
+        {
+            var items = _courseInfoRep.GetAll();
+            var reItems = from a in items
+                          join b in ids
+                          on a.ID equals b
+                          select a;
+            return reItems;
+        }
     }
 
     public interface ICourseInfoService
@@ -141,5 +151,7 @@ namespace Jango.Lab.Services
 
         void SaveCourse(CourseInfo model);
         IPagedList<CourseInfo> GetCourseList(CourseQuery query);
+
+        IQueryable<CourseInfo> GetCoursesByIds(List<long> ids);
     }
 }

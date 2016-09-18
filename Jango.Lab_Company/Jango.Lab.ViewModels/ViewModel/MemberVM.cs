@@ -15,9 +15,9 @@ namespace Jango.Lab.ViewModels
         public decimal Balance { get; set; }
         public DateTime Birthday { get; set; }
         public string BirthdayStr { get { return Birthday.ToString("yyyy-MM-dd"); } }
-        public int ProvindId { get; set; }
-        public int CityId { get; set; }
-        public int DistrictId { get; set; }
+        public string Province { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
         public string Address { get; set; }
     }
 }

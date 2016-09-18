@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "会员管理";
     Layout = "~/Views/_LayoutView.cshtml";
-    //Layout = "~/Views/Shared/__LayoutMenuView.cshtml";
 }
 @model IPagedList<Jango.Lab.Models.User>
 <h2>@ViewBag.Title</h2>
@@ -73,25 +72,6 @@
         <tfoot>
             <tr>
                 <td colspan="9">
-                    @*<nav>
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>*@
                     @if (Model != null)
                     {
                         @Html.Pagination(Model.TotalItemCount, Model.CurrentPageIndex, Model.PageSize)

@@ -15,7 +15,7 @@ namespace Jango.Lab.Wechat.Controllers
         public string Code = string.Empty;
         public MemberVM MemberInfo;
         private IUserService _userSrv;
-        protected  User _user;
+        protected User _user;
         public BaseController(IUserService userSrv)
         {
             _userSrv = userSrv;
@@ -24,6 +24,10 @@ namespace Jango.Lab.Wechat.Controllers
         {
             if (null == MemberInfo)
             {
+                if (string.IsNullOrEmpty(Code))
+                {
+                    throw new ArgumentNullException("code");
+                }
                 var user = _userSrv.GetByCode(this.Code);
                 var model = Mapper.Map<MemberVM>(user);
                 MemberInfo = model;

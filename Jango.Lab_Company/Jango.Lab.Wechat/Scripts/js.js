@@ -16,9 +16,3 @@ $(function(){
     })
 });
 
-/*我的账户界面事件*/
-$(function(){
-    $("#account .tabs .box").click(function(){
-        $(this).addClass("active").siblings().removeClass("active");
-    })
-});

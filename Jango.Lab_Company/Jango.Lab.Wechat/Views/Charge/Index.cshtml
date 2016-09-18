@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>充值</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="@Url.Content("~/css/style3.css")" />
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                    dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1;
+            dpr = window.top === window.self ? dpr : 1; //被iframe引用时，禁止缩放
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width / dpr > 750) {
+                    width = 750 * dpr;
+                }
+                docEl.dataset.width = width;
+                docEl.dataset.percent = 100 * (width / 750);
+                docEl.style.fontSize = 100 * (width / 750) + 'px';
+            };
+            recalc();
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+    </script>
+</head>
+<body>
+    <div id="account">
+        <input type="hidden" id="hidCode" value="@ViewBag.Code" />
+        <div class="head tc pr">
+            <img src="../images/account.png" alt="">
+            <p class="fs24">我的余额：<span class="fs60" id="amount"></span>元</p>
+            <a href="@Url.Content("~/charge/record?code="+ViewBag.Code)" class="fs24 pa c000">充值记录 ></a>
+        </div>
+        <div class="tabs">
+            @*<div class="box fl active">
+                    <h3 class="fs24 fw400 tc"><span class="fs48">3000</span>元</h3>
+                    <p class="fs24 tc ca6a">充3000送300点</p>
+                </div>
+                <div class="box fl ml25">
+                    <h3 class="fs24 fw400 tc"><span class="fs48">3000</span>元</h3>
+                    <p class="fs24 tc ca6a">充3000送300点</p>
+                </div>*@
+
+        </div>
+        <div class="but fs28 cfff tc charge">充值</div>
+    </div>
+</body>
+@section scripts{
+    <script type="text/javascript">
+        var code = $("#hidCode").val();
+        var getuserurl = "@Url.Content("~/member/getuserinfo?code=")" + code;
+        var getchargecardurl = "getChargeCards";
+        var chargeurl = 'Charge';
+        $(function () {
+            getuserinfo();
+            getcharges();
+            $(".charge").click(function () {
+                if (code.length > 0) {
+                    var cid = $("#account .tabs .active").attr("cid");
+                    $.post(chargeurl, { code: code, cid: cid }, function (res) {
+                        console.log(res);
+                        if (res.success) {
+                            // goto pay
+                        } else {
+
+                        }
+                    })
+                }
+            });
+        })
+        function getuserinfo() {
+            $.get(getuserurl, function (res) {
+                if (res.success) {
+                    if (res.data) {
+                        var info = res.data;
+                        $("#amount").text(parseInt(info.Balance));
+                    }
+                } else {
+
+                }
+            })
+            $(".mask").hide();
+        }
+        function getcharges() {
+            $(".mask").show();
+            $.get(getchargecardurl, function (res) {
+                if (res.success) {
+                    if (res.data) {
+                        var items = res.data;
+                        var __p = "";
+                        for (var i = 0; i < items.length; i++) {
+                            var item = items[i];
+                            __p += ' <div class="box fl ml25 mt25 car_item" cid="' + item.ID + '" id="div_' + item.ID + '"><h3 class="fs24 fw400 tc"><span class="fs48">' + parseInt(item.Price) + '</span>元</h3>' +
+                                '<p class="fs24 tc ca6a">充' + parseInt(item.Amount) + '送' + parseInt(item.GiftIntegral) + '点</p> </div>'
+                        }
+                        __p += '<div style="clear: both"></div>';
+                        $(".tabs").append(__p);
+                    }
+                }
+            });
+            $(".mask").hide();
+        }
+        /*我的账户界面事件*/
+        $(function () {
+            $("#account .tabs").on("click", " .box", function () {
+                $(this).addClass("active").siblings().removeClass("active");
+            })
+        });
+
+    </script>
+}

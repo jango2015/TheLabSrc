@@ -51,9 +51,9 @@
         </script>
         <div class="box2 fs24 mt20 pr">
             <span class="fs24">详细地址：</span>
-            <textarea></textarea>
+            <textarea name="detailAddress" id="detailAddress" required></textarea>
         </div>
-        <nav class="fs24 cfff tc">保存</nav>
+        <nav class="fs24 cfff tc save">保存</nav>
     </div>
 
 </body>
@@ -132,14 +132,39 @@
         $(function () {
             var code = $("#hidCode").val();
             console.log(code);
-            $.get("/member/getuserinfo?code=" + code, function (res) {
+            $.get("/member/getuserconsigneeinfo?code=" + code, function (res) {
                 console.log(res);
                 if (res.success) {
                     $("[name='Name']").val(res.data.Name);
                     $("[name='Mobile']").val(res.data.Mobile);
                     $("[name='Birthday']").val(res.data.BirthdayStr);
+                    $("#cmbProvince").val(res.data.Province);
+                    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+                    $("#cmbCity").val(res.data.City);
+                    $("#cmbArea").val(res.data.District);
+                    $("#detailAddress").val(res.data.Address);
                     loadxingz(res.data.BirthdayStr);
                 }
+                $(".mask").hide();
+            });
+            var ur = '/member/save'
+            $(".save").click(function () {
+                var model = {};
+                model.Name = $("input[name='Name']").val();
+                model.Mobile = $("input[name='Mobile']").val();
+                model.Birthday = $("input[name='Birthday']").val();
+                model.Province = $("#cmbProvince").val();
+                model.City = $("#cmbCity").val();
+                model.District = $("#cmbArea").val();
+                model.Address = $("#detailAddress").val();
+                model.Code = "@ViewBag.Code";
+                console.log(model);
+                $.post(ur, { model: model }, function (res) {
+                    console.log(res);
+                    if (res.success) {
+                        history.go(-1);
+                    }
+                })
             });
         })
     </script>

@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChargeService.cs" />
     <Compile Include="CoacherService.cs" />
     <Compile Include="CourseInfoService.cs" />
     <Compile Include="CourseReserveService.cs" />

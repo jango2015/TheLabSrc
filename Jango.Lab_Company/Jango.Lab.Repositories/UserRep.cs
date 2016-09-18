@@ -16,5 +16,6 @@ namespace Jango.Lab.Repositories
         }
     }
 
-    public interface IUserRep : IRepository<User>, ILabBaseRepository { }
+    public interface IUserRep : IRepository<User>, ILabBaseRepository {
+    }
 }

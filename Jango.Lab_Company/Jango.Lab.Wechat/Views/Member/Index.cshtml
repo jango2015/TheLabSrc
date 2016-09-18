@@ -2,8 +2,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>会员中心</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection">
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../icon_member/iconfont.css">
 </head>
 <body>
@@ -16,15 +22,18 @@
                     <p class="mt5">我的积分：<span id="Integral"></span></p>
                     <p class="mt5">我的余额：<span id="Balance"></span></p>
                 </div><input type="hidden" id="hidCode" value="@ViewBag.Code" />
-                <a href="edit?code=@ViewBag.Code" class="xg pa cfff fs16">修改<span class="iconfont icon-xiugai ml10"></span></a>
-                <a href="#" class="cz pa fs16 c000 tc">充值</a>
+                @if (!string.IsNullOrEmpty(ViewBag.Code))
+                {
+                    <a href="edit?code=@ViewBag.Code" class="xg pa cfff fs16">修改<span class="iconfont icon-xiugai ml10"></span></a>
+                }
+                <a href="~/charge/index?code=@ViewBag.Code" class="cz pa fs16 c000 tc">充值</a>
             </div>
             <div id="member_tabs" class="clearfix">
-                <div class="w33 fl order tc on r_line">
-                    <span class="iconfont icon-wodedingdan dpb"></span>
-                    <span class="dpb fs14">我的订单</span>
-                </div>
-                <div class="w33 fl appointment tc r_line">
+                @*<div class="w33 fl order tc on r_line">
+                        <span class="iconfont icon-wodedingdan dpb"></span>
+                        <span class="dpb fs14">我的订单</span>
+                    </div>*@
+                <div class="w33 fl appointment tc r_line on">
                     <span class="iconfont icon-yuyue dpb"></span>
                     <span class="dpb fs14">我的预约</span>
                 </div>
@@ -36,171 +45,171 @@
         </header>
         <div class="content">
             <div id="tabs_ct">
-                <div class="order_ct">
-                    <header class="bar bar-nav">
-                        <div class="order_ct_tabs c595 fs12 clearfix">
-                            <div class="w33 fl tc on order_obligations">待付款订单（<span>3</span>）</div>
-                            <div class="w33 fl tc order_unfinished">未完成订单（<span>1</span>）</div>
-                            <div class="w33 fl tc order_history">历史订单</div>
+                @*<div class="order_ct">
+                        <header class="bar bar-nav">
+                            <div class="order_ct_tabs c595 fs12 clearfix">
+                                <div class="w33 fl tc on order_obligations">待付款订单（<span>3</span>）</div>
+                                <div class="w33 fl tc order_unfinished">未完成订单（<span>1</span>）</div>
+                                <div class="w33 fl tc order_history">历史订单</div>
+                            </div>
+                        </header>
+                        <div class="content">
+                            <div class="order_ct_tabs_ct">
+                                <div class="order_obligations_ct">
+                                    <ul>
+                                        <li class="fs14">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr ceb0">待付款</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but01 cfff tc pa fs12">立即支付</div>
+                                            </div>
+                                        </li>
+                                        <li class="fs14 mt10">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr ceb0">待付款</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but01 cfff tc pa fs12">立即支付</div>
+                                            </div>
+                                        </li>
+                                        <li class="fs14 mt10">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr ceb0">待付款</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but01 cfff tc pa fs12">立即支付</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="display: none" class="order_unfinished_ct">
+                                    <ul>
+                                        <li class="fs14">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr c3eb">配送中</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but02 cfff tc pa fs12">查看物流</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div style="display: none" class="order_history_ct">
+                                    <ul>
+                                        <li class="fs14">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr c777">已完成</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but03 cfff tc pa fs12">已送达</div>
+                                            </div>
+                                        </li>
+                                        <li class="fs14 mt10">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr c777">已完成</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but03 cfff tc pa fs12">已送达</div>
+                                            </div>
+                                        </li>
+                                        <li class="fs14 mt10">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr c777">已完成</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but03 cfff tc pa fs12">已送达</div>
+                                            </div>
+                                        </li>
+                                        <li class="fs14 mt10">
+                                            <div class="order_title clearfix">
+                                                <div class="fl mt2">订单编号：689087979</div>
+                                                <div class="fl ml20 mt2">2016/07/09</div>
+                                                <div class="fr c777">已完成</div>
+                                            </div>
+                                            <div class="order_box clearfix pr">
+                                                <img src="../images/foods.jpg" class="fl foods" alt="">
+                                                <div class="fl ml10">
+                                                    <h3 class="fw400">The Mushrooms Risotto</h3>
+                                                    <p class="c5c5">意式蘑菇炖汤</p>
+                                                    <span>￥：98.00</span>
+                                                </div>
+                                                <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
+                                                <div class="but but03 cfff tc pa fs12">已送达</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </header>
-                    <div class="content">
-                        <div class="order_ct_tabs_ct">
-                            <div class="order_obligations_ct">
-                                <ul>
-                                    <li class="fs14">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr ceb0">待付款</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but01 cfff tc pa fs12">立即支付</div>
-                                        </div>
-                                    </li>
-                                    <li class="fs14 mt10">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr ceb0">待付款</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but01 cfff tc pa fs12">立即支付</div>
-                                        </div>
-                                    </li>
-                                    <li class="fs14 mt10">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr ceb0">待付款</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but01 cfff tc pa fs12">立即支付</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div style="display: none" class="order_unfinished_ct">
-                                <ul>
-                                    <li class="fs14">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr c3eb">配送中</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but02 cfff tc pa fs12">查看物流</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div style="display: none" class="order_history_ct">
-                                <ul>
-                                    <li class="fs14">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr c777">已完成</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but03 cfff tc pa fs12">已送达</div>
-                                        </div>
-                                    </li>
-                                    <li class="fs14 mt10">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr c777">已完成</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but03 cfff tc pa fs12">已送达</div>
-                                        </div>
-                                    </li>
-                                    <li class="fs14 mt10">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr c777">已完成</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but03 cfff tc pa fs12">已送达</div>
-                                        </div>
-                                    </li>
-                                    <li class="fs14 mt10">
-                                        <div class="order_title clearfix">
-                                            <div class="fl mt2">订单编号：689087979</div>
-                                            <div class="fl ml20 mt2">2016/07/09</div>
-                                            <div class="fr c777">已完成</div>
-                                        </div>
-                                        <div class="order_box clearfix pr">
-                                            <img src="../images/foods.jpg" class="fl foods" alt="">
-                                            <div class="fl ml10">
-                                                <h3 class="fw400">The Mushrooms Risotto</h3>
-                                                <p class="c5c5">意式蘑菇炖汤</p>
-                                                <span>￥：98.00</span>
-                                            </div>
-                                            <img src="../images/xiangyou.png" class="pa xiangyou" alt="">
-                                            <div class="but but03 cfff tc pa fs12">已送达</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:none;" class="appointment_ct pr">
+                    </div>*@
+                <div style="" class="appointment_ct pr">
                     <div class="dashed"></div>
                     <div class="zzc"></div>
-                    <ul>
+                    <ul id="relists">
                         <li class="pr fs14">
                             <p>
                                 <span>Monday</span>
@@ -224,59 +233,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="pr fs14">
-                            <p>
-                                <span>Monday</span>
-                                <span class="ml10">2016/08/15</span>
-                            </p>
-                            <div class="spots pa"><div></div></div>
-                            <div class="pr">
-                                <img src="../images/active.jpg" class="w100" alt="">
-                                <div class="text pa">
-                                    <span class="dpb">The Mushrooms Risotto</span>
-                                    <span class="dpb c5c5">意式蘑菇炖汤</span>
-                                    <span class="dpb">10:00~11:30</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="pr fs14">
-                            <p>
-                                <span>Monday</span>
-                                <span class="ml10">2016/08/15</span>
-                            </p>
-                            <div class="spots pa"><div></div></div>
-                            <div class="pr">
-                                <img src="../images/course.jpg" class="w100" alt="">
-                                <div class="text pa">
-                                    <span class="dpb">The Mushrooms Risotto</span>
-                                    <span class="dpb c5c5">意式蘑菇炖汤</span>
-                                    <span class="dpb">10:00~11:30</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="pr fs14">
-                            <p>
-                                <span>Monday</span>
-                                <span class="ml10">2016/08/15</span>
-                            </p>
-                            <div class="spots pa"><div></div></div>
-                            <div class="pr">
-                                <img src="../images/course.jpg" class="w100" alt="">
-                                <div class="text pa">
-                                    <span class="dpb">The Mushrooms Risotto</span>
-                                    <span class="dpb c5c5">意式蘑菇炖汤</span>
-                                    <span class="dpb">10:00~11:30</span>
-                                </div>
-                            </div>
-                            <div class="pr mt10">
-                                <img src="../images/active.jpg" class="w100" alt="">
-                                <div class="text pa">
-                                    <span class="dpb">The Mushrooms Risotto</span>
-                                    <span class="dpb c5c5">意式蘑菇炖汤</span>
-                                    <span class="dpb">10:00~11:30</span>
-                                </div>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
                 <div style="display: none" class="history_ct pr">
@@ -402,6 +359,7 @@
 
     </script>
     <script type="text/javascript">
+        var weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
         $(function () {
             var code = $("#hidCode").val();
             $.get("/member/getuserinfo?code=" + code, function (res) {
@@ -410,8 +368,52 @@
                     $("#Name").text(res.data.Name);
                     $("#Integral").text(res.data.Integral);
                     $("#Balance").text(res.data.Balance);
+                } else {
+
+                    //alert("系统或网络问题，请重新加载")
                 }
             })
+            getreserves();
+            var reserurl = '@Url.Content("~/course/getreservecourses")?code=' + code;
+            function getreserves() {
+                $.get(reserurl, function (res) {
+                    console.log(res);
+                    var __p = '';
+                    if (res.success) {
+                        if (res.data) {
+                            var itemsdata = res.data;
+                            for (var i = 0; i < itemsdata.length; i++) {
+                                var item = itemsdata[i];
+                                __p += ' <li class="pr fs14"><p><span>' + weeks[item.week - 1] + '</span><span class="ml10">' + item.date + '</span></p><div class="spots pa"><div></div></div>';
+
+                                for (var j = 0; j < item.items.length; j++) {
+                                    var ite = item.items[j];
+                                    if (j > 0) {
+                                        __p += '<div class="pr mt10">';
+                                    } else {
+                                        __p += '<div class="pr">';
+                                    }
+
+                                    if (ite.CourseType == 0) {
+                                        __p += ' <img src="../images/course.jpg" class="w100" alt="">';
+                                    }
+                                    if (ite.CourseType == 1) {
+                                        {
+                                            __p += ' <img src="../images/active.jpg" class="w100" alt="">';
+                                        }
+                                        __p += ' <div class="text pa"><span class="dpb">' + ite.Title + '</span>' +
+                                        '<span class="dpb c5c5">' + ite.Desc + '</span>' +
+                                        '<span class="dpb">' + ite.CourseBeginTimeStr + '~' + ite.CourseEndTimeStr + '</span></div></div>';
+                                    }
+                                }
+                                __p += '</li>';
+                            }
+                        }
+                    }
+                    $("#relists").append(__p);
+                });
+                $(".mask").hide();
+            }
         })
     </script>
 }

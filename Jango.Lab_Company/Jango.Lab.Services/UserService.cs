@@ -17,12 +17,15 @@ namespace Jango.Lab.Services
         #region ctor
         private readonly IUserRep _userRep;
         private readonly ILabUow _uow;
+        private readonly IUserConsigneeInfoRep _consignneRep;
         public UserService(IUserRep userRep
-            , ILabUow uow
+            , ILabUow uow,
+            IUserConsigneeInfoRep consignneRep
             )
         {
             _userRep = userRep;
             _uow = uow;
+            _consignneRep = consignneRep;
         }
         #endregion
 
@@ -94,6 +97,54 @@ namespace Jango.Lab.Services
             }
         }
 
+        public UserConsigneeInfo GetConsignneInfoByCode(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserConsigneeInfo GetConsignneInfoByUid(long userid)
+        {
+            if (userid == 0)
+            {
+                return new UserConsigneeInfo();
+            }
+            return _consignneRep.FindBy(x => x.UserID == userid).FirstOrDefault();
+        }
+
+        public void Save(MemberVM model)
+        {
+            var userInfo = GetByCode(model.Code);
+            if (userInfo == null || userInfo.ID == 0)
+            {
+                throw new ArgumentNullException("");
+            }
+            //userInfo.Mobile = model.Mobile;
+            //userInfo.Name = model.Name;
+            //userInfo.Birthday = model.Birthday;
+            //_userRep.Update(userInfo);
+
+            var consigneeInfo = GetConsignneInfoByUid(userInfo.ID);
+            if (consigneeInfo == null)
+            {
+                consigneeInfo = new UserConsigneeInfo();
+            }
+            consigneeInfo.UserID = userInfo.ID;
+            consigneeInfo.ConsigneeUserMobile = model.Mobile;
+            consigneeInfo.ConsigneeUserName = model.Name;
+            consigneeInfo.ConsigneeUserAddress = string.Format("{0}|{1}|{2}|{3}", model.Province, model.City, model.District, model.Address);
+            consigneeInfo.ModifiedAt = DateTime.Now;
+            if (consigneeInfo.ID == 0)
+            {
+                consigneeInfo.CreatedAt = consigneeInfo.ModifiedAt;
+                _consignneRep.Add(consigneeInfo);
+            }
+            else
+            {
+                _consignneRep.Update(consigneeInfo);
+            }
+            _uow.Commit();
+        }
+
         #endregion
 
     }
@@ -106,6 +157,7 @@ namespace Jango.Lab.Services
 
         void Save(User model);
 
+        void Save(MemberVM model);
 
         /*
          * 
@@ -116,5 +168,8 @@ namespace Jango.Lab.Services
         User GetByOpenId(string openid);
 
         User GetByCode(string code);
+
+        UserConsigneeInfo GetConsignneInfoByCode(string code);
+        UserConsigneeInfo GetConsignneInfoByUid(long userid);
     }
 }

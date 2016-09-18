@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@model Jango.Lab.Models.ChargeCard
+
+@using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST",OnBegin="begin",OnSuccess ="success",OnComplete="showComplete()" }))
+{
+
+    <div class="form">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <div class="form-group">
+            <label>卡号</label>
+            <input class="input input-control" type="text" required maxlength="50" readonly name="CardNO" value="@Model.CardNO" />
+        </div>
+        <div class="form-group">
+            <label>面值</label>
+            <input class="input input-control" type="number" required maxlength="7" name="Amount" value="@Model.Amount" />
+        </div>
+        <div class="form-group">
+            <label>赠送积分数</label>
+            <input class="input input-control" type="number" required maxlength="7" name="GiftIntegral" value="@Model.GiftIntegral" />
+        </div>
+        <div class="form-group">
+            <label>价格</label>
+            <input class="input input-control" type="number" required maxlength="7" name="Price" value="@Model.Price" />
+        </div>
+        <div class="form-group">
+            <label>是否有效</label>
+            <select class="input input-control" required name="IsValid">
+                <option value="">--请选择--</option>
+                @{ var srt = Model.IsValid ? "selected" : ""; var srf = Model.IsValid ? "" : "selected"; }
+                <option value="true" @srt>有效</option>
+                <option value="false" @srf>无效</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>备注</label>
+            <textarea class="input input-control" type="text" maxlength="500" rows="5" name="Remark">@Model.Remark</textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <a class="btn btn-primary" href="/charge/index">返回</a>
+        </div>
+    </div>
+
+                    }
+@section Scripts{
+    <script>
+        $(function () {
+            $("input[name='Title']").change(function () {
+                var vl = $(this).val();
+                var a = vl.indexOf('CZ');
+                if (a < 0) {
+                    $(this).val("CZ" + vl);
+                }
+            })
+        });
+        function begin() {
+            alert('a')
+        }
+        function success(res) {
+            alert(res);
+            console.log(res);
+        }
+        function showComplete(res) {
+            console.log(res);
+        }
+    </script>
+}

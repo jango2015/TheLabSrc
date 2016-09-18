@@ -1,29 +1,27 @@
 ﻿@using Jango.Lib.CastleWindsor.MVC.Extensions;
 @{
-    ViewBag.Title = "课程/活动管理";
+    ViewBag.Title = "充值/充值记录";
     Layout = "~/Views/_LayoutView.cshtml";
 }
-@model IPagedList<Jango.Lab.Models.CourseInfo>
+@model IPagedList<Jango.Lab.Models.ChargeCard>
 <h2>@ViewBag.Title</h2>
 
 <div class="search">
 
 </div>
 <div class="panel">
-    <div class="btn-group">
-        <a href="/course/Edit" class="btn btn-default">新增</a>
-    </div>
 </div>
 
 <div class="panel-body">
     <table class="table table-bordered table-responsive">
         <thead>
             <tr>
-                <th>标题</th>
-                <th>描述</th>
-                <th>使用积分数</th>
-                <th>使用余额数</th>
-                <th>类型</th>
+                <th>卡号</th>
+                <th>面额</th>
+                <th>送积分数</th>
+                <th>价格</th>
+                <th>是否有效</th>
+                <th>备注</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -33,26 +31,23 @@
                 foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Title</td>
-                        <td>@item.Desc</td>
-                        <td>@item.IntegralUse</td>
-                        <td>@item.BalanceUse</td>
+                        <td>@item.CardNO</td>
+                        <td>@item.Amount</td>
+                        <td>@item.GiftIntegral</td>
+                        <td>@item.Price</td>
                         @{
-                            if (item.CourseType == Jango.Lab.Models.EnumCourseType.Activity)
+                            if (item.IsValid)
                             {
-                                <td>活动</td>
-                            }
-                            else if (item.CourseType == Jango.Lab.Models.EnumCourseType.Course)
-                            {
-                                <td>课程</td>
+                                <td>有效</td>
                             }
                             else
                             {
-                                <td></td>}
+                                <td>无效</td>}
                         }
                         <td>
-                            <a href="/course/edit?id=@item.ID">编辑</a>
+                            <a href="/charge/editcard?id=@item.ID">编辑</a>
                         </td>
+                        <td>@item.Remark</td>
                     </tr>
                                 }
                             }
@@ -68,7 +63,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     @if (Model != null)
                     {
                         @Html.Pagination(Model.TotalItemCount, Model.CurrentPageIndex, Model.PageSize)

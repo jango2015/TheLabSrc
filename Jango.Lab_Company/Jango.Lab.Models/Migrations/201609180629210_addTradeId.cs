@@ -3,16 +3,16 @@ namespace Jango.Lab.Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addIgnoreField : DbMigration
+    public partial class addTradeId : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.CourseInfoes", "IsReserved", c => c.Boolean(nullable: false));
+            AddColumn("dbo.ChargeRecords", "tradeId", c => c.String(unicode: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.CourseInfoes", "IsReserved");
+            DropColumn("dbo.ChargeRecords", "tradeId");
         }
     }
 }
