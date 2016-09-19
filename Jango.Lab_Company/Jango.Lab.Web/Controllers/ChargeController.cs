@@ -11,11 +11,8 @@ namespace Jango.Lab.Web.Controllers
 {
     public class ChargeController : Controller
     {
-        private readonly IChargeService _chargeSrv;
-        public ChargeController(IChargeService chargeSrv)
-        {
-            _chargeSrv = chargeSrv;
-        }
+        private readonly IChargeService _chargeSrv = LoadServices._ChargeService;
+      
         public ActionResult Index(ChargeQuery query)
         {
             var items = _chargeSrv.GetAllChargeCardList(query);

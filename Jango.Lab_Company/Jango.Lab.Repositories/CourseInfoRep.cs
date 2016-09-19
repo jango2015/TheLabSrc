@@ -5,23 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Jango.Lib.Repository.Core;
+
 
 namespace Jango.Lab.Repositories
 {
-    public class CourseInfoRep : LabBaseRepository<CourseInfo>, ICourseInfoRep
+    public class CourseInfoRep : BaseRepository<CourseInfo>, ICourseInfoRep
     {
-        public CourseInfoRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
-        {
-        }
     }
-    public class CourseCategoryRep : LabBaseRepository<CourseCategory>, ICourseCategoryRep
+    public class CourseCategoryRep : BaseRepository<CourseCategory>, ICourseCategoryRep
     {
-        public CourseCategoryRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
-        {
-        }
     }
-    public interface ICourseInfoRep : IRepository<CourseInfo>, ILabBaseRepository { }
+    public interface ICourseInfoRep : IBaseRepository<CourseInfo> { }
 
-    public interface ICourseCategoryRep : IRepository<CourseCategory>, ILabBaseRepository { }
+    public interface ICourseCategoryRep : IBaseRepository<CourseCategory> { }
 }

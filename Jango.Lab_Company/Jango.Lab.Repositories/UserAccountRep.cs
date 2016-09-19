@@ -1,5 +1,5 @@
 ﻿using Jango.Lab.Models;
-using Jango.Lib.Repository.Core;
+
 using Jango.Lab.Repositories.Lab;
 using System;
 using System.Collections.Generic;
@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.Repositories
 {
-    public class UserAccountRep : LabBaseRepository<UserAccount>, IUserAccountRep
+    public class UserAccountRep : BaseRepository<UserAccount>, IUserAccountRep
     {
-        public UserAccountRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
-        {
-        }
     }
 
-    public interface IUserAccountRep : IRepository<UserAccount>, ILabBaseRepository { }
+    public interface IUserAccountRep : IBaseRepository<UserAccount> { }
 }

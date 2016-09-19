@@ -2,28 +2,24 @@
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
 using Jango.Lab.ViewModels.Query;
-using Jango.Lib.CastleWindsor.MVC.Extensions;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Webdiyer.WebControls.Mvc;
+
 
 namespace Jango.Lab.Services
 {
     public class CoacherService : ICoacherService
     {
-        private readonly ICoacherRep _coacherRep;
-        private readonly ICourseCoacherRep _courseCoacherRep;
-        private readonly ICourseInfoRep _courseRep;
-        private ILabUow _uow;
-        public CoacherService(ICoacherRep coacherRep, ICourseCoacherRep courseCoacherRep, ICourseInfoRep courseRep, ILabUow uow)
-        {
-            _coacherRep = coacherRep;
-            _courseCoacherRep = courseCoacherRep;
-            _courseRep = courseRep;
-            _uow = uow;
-        }
+        private readonly ICoacherRep _coacherRep = LoadReps._coacherRep;
+        private readonly ICourseCoacherRep _courseCoacherRep = LoadReps._courseCoacherRep;
+        private readonly ICourseInfoRep _courseRep = LoadReps._courseInfoRep;
+        private readonly ILabUow _uow = LoadReps._uow;
+
         public void Delte(long id)
         {
             if (id > 0)
@@ -35,7 +31,7 @@ namespace Jango.Lab.Services
 
         public IPagedList<Coacher> GetAllList(CoacherQuery query)
         {
-            return _coacherRep.GetAllList().AsPagedList(query);
+            return _coacherRep.GetAllList().OrderByDescending(x => x.ID).ToPagedList(query.PageNumber, query.PageSize);
         }
 
         public Coacher GetById(long id)
@@ -49,7 +45,7 @@ namespace Jango.Lab.Services
             if (courseCoachers.Any())
             {
                 var now = DateTime.Now;
-                var courses = _courseRep.GetMany(x => x.CourseBeginTime <= now && x.CourseEndTime >= now);
+                var courses = _courseRep.FindBy(x => x.CourseBeginTime <= now && x.CourseEndTime >= now);
                 var cos = from c in courses
                           join b in courseCoachers
                           on c.ID equals b.CourseID

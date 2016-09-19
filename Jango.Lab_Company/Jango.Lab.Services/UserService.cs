@@ -3,30 +3,22 @@ using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
 using Jango.Lab.ViewModels;
 using Jango.Lab.ViewModels.Query;
-using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Webdiyer.WebControls.Mvc;
 
 namespace Jango.Lab.Services
 {
     public class UserService : IUserService
     {
         #region ctor
-        private readonly IUserRep _userRep;
-        private readonly ILabUow _uow;
-        private readonly IUserConsigneeInfoRep _consignneRep;
-        public UserService(IUserRep userRep
-            , ILabUow uow,
-            IUserConsigneeInfoRep consignneRep
-            )
-        {
-            _userRep = userRep;
-            _uow = uow;
-            _consignneRep = consignneRep;
-        }
+        private readonly IUserRep _userRep = LoadReps._userRep;
+        private readonly ILabUow _uow = LoadReps._uow;
+        private readonly IUserConsigneeInfoRep _consignneRep = LoadReps._userConsigneeInfoRep;
+
         #endregion
 
         #region bg
@@ -38,7 +30,7 @@ namespace Jango.Lab.Services
 
         public IPagedList<User> GetUserList(UserQuery query)
         {
-            var users = _userRep.GetAllList().AsPagedList(query);
+            var users = _userRep.GetAllList().OrderByDescending(x => x.ID).ToPagedList<User>(query.PageNumber, query.PageSize);
             return users;
         }
 

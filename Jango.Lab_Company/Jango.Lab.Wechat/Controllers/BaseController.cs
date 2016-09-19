@@ -14,12 +14,8 @@ namespace Jango.Lab.Wechat.Controllers
     {
         public string Code = string.Empty;
         public MemberVM MemberInfo;
-        private IUserService _userSrv;
+        public readonly IUserService _userSrv = LoadServices._UserService;
         protected User _user;
-        public BaseController(IUserService userSrv)
-        {
-            _userSrv = userSrv;
-        }
         protected void LoadMemberInfo()
         {
             if (null == MemberInfo)

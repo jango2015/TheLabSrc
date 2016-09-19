@@ -8,7 +8,6 @@ namespace Jango.Lab.Wechat.Controllers
 {
     public class UploadController : Controller
     {
-        // GET: Upload
         public ActionResult Image()
         {
             return View();

@@ -11,12 +11,6 @@ namespace Jango.Lab.Wechat.Controllers
 {
     public class MemberController : BaseController
     {
-        private IUserService _userSrv;
-        public MemberController(IUserService userSrv) : base(userSrv)
-        {
-            _userSrv = userSrv;
-        }
-
         public ActionResult Index(string code)
         {
             Code = code;

@@ -1,5 +1,5 @@
 ﻿using Jango.Lab.Models;
-using Jango.Lib.Repository.Core;
+
 using Jango.Lab.Repositories.Lab;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.Repositories
 {
-    public class CourseSignInRecordRep : LabBaseRepository<CourseSignInRecord>, ICourseSignInRecordRep
+    public class CourseSignInRecordRep : BaseRepository<CourseSignInRecord>, ICourseSignInRecordRep
     {
-        public CourseSignInRecordRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
-        {
-        }
     }
-    public interface ICourseSignInRecordRep : IRepository<CourseSignInRecord>, ILabBaseRepository { }
+    public interface ICourseSignInRecordRep : IBaseRepository<CourseSignInRecord> { }
 }

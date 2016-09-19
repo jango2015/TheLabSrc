@@ -10,15 +10,10 @@ namespace Jango.Lab.Services
 {
     public class MessageService : IMessageService
     {
-        private readonly ILabUow _uow;
-        private readonly IMessageRep _messageRep;
-        private readonly ILogRep _logsrv;
-        public MessageService(IMessageRep messageeRep, ILabUow uow, ILogRep logsrv)
-        {
-            _messageRep = messageeRep;
-            _uow = uow;
-            _logsrv = logsrv;
-        }
+        private readonly ILabUow _uow = LoadReps._uow;
+        private readonly IMessageRep _messageRep = LoadReps._messageRep;
+        private readonly ILogRep _logsrv = LoadReps._logRep;
+
 
         public void AddMsg(Message msg)
         {

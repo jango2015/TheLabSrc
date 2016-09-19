@@ -2,31 +2,25 @@
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
 using Jango.Lab.ViewModels.Query;
-using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Webdiyer.WebControls.Mvc;
+
 
 namespace Jango.Lab.Services
 {
     public class ChargeService : IChargeService
     {
         public object obj = new object();
-        private readonly ILabUow _uow;
-        private readonly IChargeCardRep _chargeCardRep;
-        private readonly IChargeRecordRep _chargeRecordRep;
-        private readonly IUserRep _userRep;
-        private readonly IUserAccountRep _userAccountRep;
-        public ChargeService(ILabUow uow, IChargeCardRep chargeCardRep, IChargeRecordRep chargeRecordRep, IUserRep userRep, IUserAccountRep userAccountRep)
-        {
-            _uow = uow;
-            _chargeCardRep = chargeCardRep;
-            _chargeRecordRep = chargeRecordRep;
-            _userRep = userRep;
-            _userAccountRep = userAccountRep;
-        }
+        private readonly ILabUow _uow = LoadReps._uow;
+        private readonly IChargeCardRep _chargeCardRep = LoadReps._chargeCardRep;
+        private readonly IChargeRecordRep _chargeRecordRep = LoadReps._chargeRecordRep;
+        private readonly IUserRep _userRep = LoadReps._userRep;
+        private readonly IUserAccountRep _userAccountRep = LoadReps._userAccountRep;
+
 
         public IQueryable<ChargeCard> GetValidChargeCards()
         {
@@ -151,12 +145,12 @@ namespace Jango.Lab.Services
 
         public IPagedList<ChargeCard> GetAllChargeCardList(ChargeQuery query)
         {
-            return _chargeCardRep.GetAllList().AsPagedList(query);
+            return _chargeCardRep.GetAllList().OrderByDescending(x => x.ID).ToPagedList(query.PageNumber, query.PageSize);
         }
 
         public IPagedList<ChargeRecord> GetAllChargeRecordList(ChargeRecordQuery query)
         {
-            return _chargeRecordRep.GetAllList().AsPagedList(query);
+            return _chargeRecordRep.GetAllList().OrderByDescending(x => x.ID).ToPagedList(query.PageNumber, query.PageSize);
         }
 
         public string GetCardNo()

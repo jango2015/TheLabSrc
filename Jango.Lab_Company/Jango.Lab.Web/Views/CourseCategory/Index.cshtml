@@ -1,9 +1,9 @@
-﻿@using Jango.Lib.CastleWindsor.MVC.Extensions;
-@{
+﻿@{
     ViewBag.Title = "课程分类管理";
     Layout = "~/Views/_LayoutView.cshtml";
 }
-@model IPagedList<Jango.Lab.Models.CourseCategory>
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.IPagedList<Jango.Lab.Models.CourseCategory>
 
 <h2>@ViewBag.Title</h2>
 
@@ -60,7 +60,8 @@
                 <td colspan="6">
                     @if (Model != null)
                     {
-                        @Html.Pagination(Model.TotalItemCount, Model.CurrentPageIndex, Model.PageSize)
+                        @*@Html.Pagination(Model.TotalItemCount, Model.CurrentPageIndex, Model.PageSize)*@
+                        @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>" }).AjaxOptions(a => a.SetUpdateTargetId("tbinfos"))
                     }
                 </td>
             </tr>

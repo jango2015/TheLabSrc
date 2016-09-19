@@ -1,6 +1,6 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.Windsor.Installer;
-using Jango.Lib.CastleWindsor.MVC;
+﻿
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,6 @@ namespace Jango.Lab.Wechat
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             MapperStrapper.ConfigureAutoMapper();
-            BootStrapper.InstallBootStrapperContainer(Classes.FromThisAssembly(), new List<string>() { "Jango.Lab.Models", "Jango.Lab.Services", "Jango.Lab.Repositories" });
         }
 
 
@@ -50,7 +49,6 @@ namespace Jango.Lab.Wechat
 
         protected void Application_End()
         {
-            CastleIOC.Container.Dispose();
         }
     }
 }

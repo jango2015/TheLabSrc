@@ -42,9 +42,6 @@
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Jango.Lib.Repository.Core">
-      <HintPath>..\Lib\Jango.Lib.Repository.Core.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
@@ -67,7 +64,11 @@
     <Compile Include="CourseReserveRecordRep.cs" />
     <Compile Include="CourseSignInRecordRep.cs" />
     <Compile Include="CourseTellerRep.cs" />
-    <Compile Include="Lab\LabInfrastructure.cs" />
+    <Compile Include="Lab\EFContextFactory.cs" />
+    <Compile Include="Lab\ILabUow.cs" />
+    <Compile Include="Lab\BaseRepository.cs" />
+    <Compile Include="Lab\LabUow.cs" />
+    <Compile Include="LoadReps.cs" />
     <Compile Include="LogRep.cs" />
     <Compile Include="MessageRep.cs" />
     <Compile Include="OrderRep.cs" />

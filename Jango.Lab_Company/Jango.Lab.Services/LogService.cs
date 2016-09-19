@@ -11,13 +11,9 @@ namespace Jango.Lab.Services
 {
     public class LogService : ILogService
     {
-        private readonly ILogRep _logRep;
-        private readonly ILabUow _uow;
-        public LogService(ILogRep logRep, ILabUow uow)
-        {
-            _logRep = logRep;
-            _uow = uow;
-        }
+        private readonly ILogRep _logRep = LoadReps._logRep;
+        private readonly ILabUow _uow = LoadReps._uow;
+
 
         public void Add(Log log)
         {

@@ -2,37 +2,28 @@
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
 using Jango.Lab.ViewModels.Query;
-using Jango.Lib.CastleWindsor.MVC.Extensions;
-using Jango.Lib.Repository.Core;
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Webdiyer.WebControls.Mvc;
+
 
 namespace Jango.Lab.Services
 {
     public class CourseInfoService : ICourseInfoService
     {
-        private readonly ICourseInfoRep _courseInfoRep;
-        private readonly ICourseCategoryRep _courseCategoryRep;
-        private readonly ICourseCoacherRep _courseCoacherRep;
-        private readonly ILabUow _uow;
-        public CourseInfoService(
-            ICourseCategoryRep courseCategoryRep,
-            ICourseInfoRep courseInfoRep,
-            ICourseCoacherRep courseCoacherRep,
-            ILabUow uow
-            )
-        {
-            _courseCategoryRep = courseCategoryRep;
-            _courseInfoRep = courseInfoRep;
-            _courseCoacherRep = courseCoacherRep;
-            _uow = uow;
-        }
+        private readonly ICourseInfoRep _courseInfoRep = LoadReps._courseInfoRep;
+        private readonly ICourseCategoryRep _courseCategoryRep = LoadReps._courseCategoryRep;
+        private readonly ICourseCoacherRep _courseCoacherRep = LoadReps._courseCoacherRep;
+        private readonly ILabUow _uow = LoadReps._uow;
+
         public IPagedList<CourseCategory> GetCourseCategoryList(CourseCategoryQuery query)
         {
-            return _courseCategoryRep.GetAllList().AsPagedList(query);
+            return _courseCategoryRep.GetAllList().OrderByDescending(x => x.Id).ToPagedList(query.PageNumber, query.PageSize);
         }
 
         public IPagedList<CourseInfo> GetCourseList(CourseQuery query)
@@ -41,9 +32,9 @@ namespace Jango.Lab.Services
             {
                 var searchDate = Convert.ToDateTime(query.SearchDate.Value.Date.ToString());
                 var lsearchDate = searchDate.AddDays(1).AddSeconds(-1);
-                return _courseInfoRep.GetMany(x => (x.CourseBeginTime >= searchDate && x.CourseBeginTime <= lsearchDate)).AsPagedList(query);
+                return _courseInfoRep.FindBy(x => (x.CourseBeginTime >= searchDate && x.CourseBeginTime <= lsearchDate)).ToPagedList(query.PageNumber, query.PageSize);
             }
-            return _courseInfoRep.GetAllList().AsPagedList(query);
+            return _courseInfoRep.GetAllList().OrderByDescending(x => x.ID).ToPagedList(query.PageNumber, query.PageSize);
         }
 
         public CourseCategory GetById(long id)

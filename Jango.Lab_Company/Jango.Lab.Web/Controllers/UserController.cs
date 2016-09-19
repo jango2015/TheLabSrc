@@ -11,13 +11,8 @@ namespace Jango.Lab.Web.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService _userSrv;
-        public UserController(IUserService userSrv)
-        {
-            _userSrv = userSrv;
-        }
+        private readonly IUserService _userSrv = LoadServices._UserService;
 
-        // GET: User
         public ActionResult Index(UserQuery query)
         {
             var users = _userSrv.GetUserList(query);

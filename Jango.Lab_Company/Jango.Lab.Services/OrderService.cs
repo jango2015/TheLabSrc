@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.Services
 {
-    class OrderService
+    public class OrderService: IOrderService
     {
     }
+    public interface IOrderService { }
 }

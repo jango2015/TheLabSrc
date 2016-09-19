@@ -11,11 +11,8 @@ namespace Jango.Lab.Web.Controllers
 {
     public class CoacherController : Controller
     {
-        private readonly ICoacherService _coacherSrv;
-        public CoacherController(ICoacherService coacherSrv)
-        {
-            _coacherSrv = coacherSrv;
-        }
+        private readonly ICoacherService _coacherSrv = LoadServices._CoacherService;
+     
         public ActionResult Index(CoacherQuery query)
         {
             var items = _coacherSrv.GetAllList(query);

@@ -11,14 +11,8 @@ namespace Jango.Lab.Web.Controllers
 {
     public class CourseCategoryController : Controller
     {
-        private readonly ICourseInfoService _courseInfoSrv;
-        public CourseCategoryController(
-            ICourseInfoService courseInfoSrv
-            )
-        {
-            _courseInfoSrv = courseInfoSrv;
-        }
-        // GET: CourseCategory
+        private readonly ICourseInfoService _courseInfoSrv = LoadServices._CourseInfoService;
+
         public ActionResult Index(CourseCategoryQuery query)
         {
             var categories = _courseInfoSrv.GetCourseCategoryList(query);

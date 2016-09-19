@@ -1,6 +1,6 @@
 ﻿using Jango.Lab.Models;
 using Jango.Lab.Repositories.Lab;
-using Jango.Lib.Repository.Core;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +9,15 @@ using System.Threading.Tasks;
 
 namespace Jango.Lab.Repositories
 {
-    public class CoacherRep : LabBaseRepository<Coacher>, ICoacherRep
+    public class CoacherRep : BaseRepository<Coacher>, ICoacherRep
     {
-        public CoacherRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
-        {
-        }
+        
     }
-    public interface ICoacherRep : IRepository<Coacher>, ILabBaseRepository { }
+    public interface ICoacherRep : IBaseRepository<Coacher> { }
 
-    public class CourseCoacherRep : LabBaseRepository<CourseCoacher>, ICourseCoacherRep
+    public class CourseCoacherRep : BaseRepository<CourseCoacher>, ICourseCoacherRep
     {
-        public CourseCoacherRep(ILabDbContextFactory dbContextFactory) : base(dbContextFactory)
-        {
-        }
+
     }
-    public interface ICourseCoacherRep : IRepository<CourseCoacher>, ILabBaseRepository { }
+    public interface ICourseCoacherRep : IBaseRepository<CourseCoacher> { }
 }

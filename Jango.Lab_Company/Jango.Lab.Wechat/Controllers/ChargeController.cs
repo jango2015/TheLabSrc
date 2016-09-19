@@ -10,11 +10,7 @@ namespace Jango.Lab.Wechat.Controllers
 {
     public class ChargeController : BaseController
     {
-        private readonly IChargeService _chargeSrv;
-        public ChargeController(IChargeService chargeSrv, IUserService userSrv) : base(userSrv)
-        {
-            _chargeSrv = chargeSrv;
-        }
+        private readonly IChargeService _chargeSrv = LoadServices._ChargeService;
 
         public ActionResult Index(string code)
         {

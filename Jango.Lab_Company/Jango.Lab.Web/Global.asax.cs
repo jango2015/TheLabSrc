@@ -1,5 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
-using Jango.Lib.CastleWindsor.MVC;
+﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +15,6 @@ namespace Jango.Lab.Web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            BootStrapper.InstallBootStrapperContainer(Classes.FromThisAssembly(), new List<string>() { "Jango.Lab.Models", "Jango.Lab.Services", "Jango.Lab.Repositories" });
         }
 
 
@@ -40,7 +38,6 @@ namespace Jango.Lab.Web
 
         protected void Application_End()
         {
-            CastleIOC.Container.Dispose();
         }
     }
 }

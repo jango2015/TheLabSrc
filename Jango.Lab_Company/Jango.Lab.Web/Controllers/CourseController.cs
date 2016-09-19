@@ -11,14 +11,9 @@ namespace Jango.Lab.Web.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly ICourseInfoService _courseSrv;
-        private readonly ICoacherService _coacherSrv;
-        public CourseController(ICourseInfoService courseSrv, ICoacherService coacherSrv)
-        {
-            _courseSrv = courseSrv;
-            _coacherSrv = coacherSrv;
-        }
-        // GET: Course
+        private readonly ICourseInfoService _courseSrv = LoadServices._CourseInfoService;
+        private readonly ICoacherService _coacherSrv = LoadServices._CoacherService;
+
         public ActionResult Index(CourseQuery query)
         {
             var items = _courseSrv.GetCourseList(query);
@@ -26,7 +21,6 @@ namespace Jango.Lab.Web.Controllers
         }
 
 
-        // GET: Course/Edit/5
         public ActionResult Edit(long id = 0)
         {
             var model = _courseSrv.GetCourseById(id);
@@ -36,7 +30,6 @@ namespace Jango.Lab.Web.Controllers
             return View(model);
         }
 
-        // POST: Course/Edit/5
         [HttpPost]
         public ActionResult Edit(CourseInfo model)
         {
@@ -51,13 +44,11 @@ namespace Jango.Lab.Web.Controllers
             }
         }
 
-        // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Course/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

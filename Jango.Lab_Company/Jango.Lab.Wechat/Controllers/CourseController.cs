@@ -9,17 +9,9 @@ namespace Jango.Lab.Wechat.Controllers
 {
     public class CourseController : BaseController
     {
-        private readonly ICourseInfoService _courseInfoSrv;
-        private readonly ICourseReserveService _courseReserveSrv;
-        private readonly ICoacherService _coacherSrv;
-        public CourseController(IUserService userSrv, ICourseInfoService courseInfoSrv,
-            ICoacherService coacherSrv,
-            ICourseReserveService courseReserveSrv) : base(userSrv)
-        {
-            _courseInfoSrv = courseInfoSrv;
-            _coacherSrv = coacherSrv;
-            _courseReserveSrv = courseReserveSrv;
-        }
+        private readonly ICourseInfoService _courseInfoSrv = LoadServices._CourseInfoService;
+        private readonly ICourseReserveService _courseReserveSrv = LoadServices._CourseReserveService;
+        private readonly ICoacherService _coacherSrv = LoadServices._CoacherService;
 
         public ActionResult Index(string code)
         {

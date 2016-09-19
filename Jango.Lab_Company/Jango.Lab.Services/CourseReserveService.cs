@@ -2,28 +2,25 @@
 using Jango.Lab.Repositories;
 using Jango.Lab.Repositories.Lab;
 using Jango.Lab.ViewModels.Query;
-using Jango.Lib.CastleWindsor.MVC.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Webdiyer.WebControls.Mvc;
+
 
 namespace Jango.Lab.Services
 {
     public class CourseReserveService : ICourseReserveService
     {
-        private readonly ICourseReserveRecordRep _courseReserveRep;
-        private readonly ILabUow _uow;
-        public CourseReserveService(ICourseReserveRecordRep courseReserveRep, ILabUow uow)
-        {
-            _courseReserveRep = courseReserveRep;
-            _uow = uow;
-        }
+        private readonly ICourseReserveRecordRep _courseReserveRep = LoadReps._courseReserveRecordRep;
+        private readonly ILabUow _uow = LoadReps._uow;
+
         public IPagedList<CourseReserveRecord> GetCoourseReservesPageList(CourseReserveQuery query)
         {
-            return _courseReserveRep.GetAll().AsPagedList(query);
+            return _courseReserveRep.GetAll().OrderByDescending(x => x.ID).ToPagedList(query.PageNumber, query.PageSize);
         }
 
         public IQueryable<CourseReserveRecord> GetCourseReserveList()

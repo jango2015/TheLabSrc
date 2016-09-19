@@ -10,11 +10,7 @@ namespace Jango.Lab.Wechat.Controllers
 {
     public class RegisterController : BaseController
     {
-        private readonly IMessageService _msgSrv;
-        public RegisterController(IUserService userSrv, IMessageService msgSrv) : base(userSrv)
-        {
-            _msgSrv = msgSrv;
-        }
+        private readonly IMessageService _msgSrv = LoadServices._MessageService;
 
         public ActionResult Register()
         {
