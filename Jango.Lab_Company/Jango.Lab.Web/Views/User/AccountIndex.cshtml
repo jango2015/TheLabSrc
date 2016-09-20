@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "会员账户管理";
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@using Jango.Lab.Models
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.IPagedList<Jango.Lab.ViewModels.ViewModel.UserAccountVM>
+<h2>@ViewBag.Title</h2>
+
+<div class=" search">
+
+</div>
+<div class="panel">
+    <div class="btn-group">
+        <a href="/user/accountedit" class="btn btn-default">新增</a>
+    </div>
+</div>
+
+<div class="panel-body" id="articles">
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>手机号</th>
+                <th>账户类型</th>
+                <th>额度</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Mobile</td>
+                        @{
+                            if (item.AccountType == (int)EnumAccountType.Balance)
+                            {
+                                <td>余额</td>
+                            }
+                            else if (item.AccountType == (int)EnumAccountType.Integral)
+                            {
+                                <td>积分</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                        <td>@item.Amount</td>
+
+                        <td>
+                            <a href="/user/accountedit?id=@item.ID">编辑</a>
+                        </td>
+                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="9">
+                                        <div class="alert-warning ">暂无记录</div>
+                                    </td>
+                                </tr>
+                            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9">
+                    @if (Model != null)
+                    { @*@Html.Pagination(Model.TotalItemCount, Model.CurrentPageIndex, Model.PageSize)*@
+                        @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>" }).AjaxOptions(a => a.SetUpdateTargetId("tbinfos"))
+                    }
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+</div>

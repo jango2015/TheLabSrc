@@ -11,4 +11,6 @@ namespace Jango.Lab.ViewModels.Query
     {
 
     }
+
+    public  class UserAccountQuery : PageQuery { }
 }

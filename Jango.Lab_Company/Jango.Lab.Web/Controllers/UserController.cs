@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Jango.Lab.ViewModels.ViewModel;
 
 namespace Jango.Lab.Web.Controllers
 {
@@ -31,6 +32,31 @@ namespace Jango.Lab.Web.Controllers
             {
                 _userSrv.Save(model);
                 return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult AccountIndex(UserAccountQuery query)
+        {
+            var users = _userSrv.GetAccounts(query);
+            return View(users);
+        }
+
+        public ActionResult AccountEdit(long id = 0)
+        {
+            var model = _userSrv.GetAccountVmById(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AccountEdit(UserAccountVM model)
+        {
+            try
+            {
+                _userSrv.Save(model);
+                return RedirectToAction("AccountIndex");
             }
             catch (Exception ex)
             {

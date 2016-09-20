@@ -219,6 +219,8 @@
     <Content Include="Views\Charge\Index.cshtml" />
     <Content Include="Views\Charge\Record.cshtml" />
     <Content Include="Views\Charge\Edit.cshtml" />
+    <Content Include="Views\User\AccountIndex.cshtml" />
+    <Content Include="Views\User\AccountEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

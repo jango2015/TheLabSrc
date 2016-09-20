@@ -25,8 +25,17 @@ namespace Jango.Lab.Wechat.Controllers
                     throw new ArgumentNullException("code");
                 }
                 var user = _userSrv.GetByCode(this.Code);
+
                 var model = Mapper.Map<MemberVM>(user);
-                MemberInfo = model;
+                MemberInfo = model; if (user != null || user.ID > 0)
+                {
+                    var acounts = _userSrv.GetAccountsByUserId(user.ID);
+                    if (MemberInfo != null)
+                    {
+                        MemberInfo.Integral = acounts.Where(a => a.AccountType == (int)EnumAccountType.Integral).Sum(x => x.Amount);
+                        MemberInfo.Balance = acounts.Where(a => a.AccountType == (int)EnumAccountType.Balance).Sum(x => x.Amount);
+                    }
+                }
                 _user = user;
                 this.Code = MemberInfo != null ? MemberInfo.Code : this.Code;
             }

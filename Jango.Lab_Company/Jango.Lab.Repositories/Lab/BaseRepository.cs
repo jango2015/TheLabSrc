@@ -47,7 +47,11 @@ namespace Jango.Lab.Repositories.Lab
 
         public bool Update(T entity)
         {
-            _db.Entry<T>(entity).State = EntityState.Detached;
+            if (!_db.Set<T>().Local.Contains(entity))
+            {
+                _db.Set<T>().Attach(entity);
+            }
+            _db.Entry(entity).State = EntityState.Modified;
 
             return true;
         }

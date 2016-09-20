@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Jango.Lab.ViewModels.ViewModel;
 using Webdiyer.WebControls.Mvc;
 
 namespace Jango.Lab.Services
@@ -18,10 +19,29 @@ namespace Jango.Lab.Services
         private readonly IUserRep _userRep = LoadReps._userRep;
         private readonly ILabUow _uow = LoadReps._uow;
         private readonly IUserConsigneeInfoRep _consignneRep = LoadReps._userConsigneeInfoRep;
-
+        private readonly IUserAccountRep _userAccountRep = LoadReps._userAccountRep;
         #endregion
 
         #region bg
+
+        public IPagedList<UserAccountVM> GetAccounts(UserAccountQuery query)
+        {
+            var userAccounts = _userAccountRep.GetAll();//.OrderByDescending(x => x.ID).ToPagedList<UserAccount>(query.PageNumber, query.PageSize)
+            var items = (from a in userAccounts
+                         join b in (_userRep.GetAll())
+                             on a.UserID equals b.ID
+                         select new UserAccountVM()
+                         {
+                             ID = a.ID,
+                             UserID = b.ID,
+                             AccountType = a.AccountType,
+                             Amount = a.Amount,
+                             Mobile = b.Mobile,
+                             Name = b.Name
+                         }).OrderByDescending(x => x.ID).ToPagedList<UserAccountVM>(query.PageNumber, query.PageSize);
+            return items;
+        }
+
         public User GetById(long id)
         {
             if (id == 0) return new User();
@@ -64,6 +84,51 @@ namespace Jango.Lab.Services
 
         #region api
 
+        public void Save(UserAccountVM model)
+        {
+            var account = new UserAccount
+            {
+                ID = model.ID,
+                AccountType = model.AccountType,
+                UserID = model.UserID,
+                ModifiedAt = DateTime.Now
+            };
+            if (account.ID == 0)
+            {
+                account.CreatedAt = DateTime.Now;
+                _userAccountRep.Add(account);
+            }
+            else
+            {
+                var item = _userAccountRep.GetById(model.ID);
+                item.AccountType = model.AccountType;
+                item.Amount = model.Amount;
+                item.UserID = model.UserID;
+                _userAccountRep.Update(item);
+            }
+            _uow.Commit();
+        }
+
+        public IQueryable<UserAccount> GetAccountsByUserId(long userId)
+        {
+            return _userAccountRep.FindBy(x => x.UserID == userId);
+        }
+
+        public UserAccountVM GetAccountVmById(long id)
+        {
+            if (id == 0) return new UserAccountVM();
+            var a = _userAccountRep.GetById(id);//.OrderByDescending(x => x.ID).ToPagedList<UserAccount>(query.PageNumber, query.PageSize)
+            if (a == null || a.ID == 0) return new UserAccountVM();
+            var b = _userRep.GetById(a.UserID);
+            var item = new UserAccountVM();
+            item.ID = a.ID;
+            item.UserID = b.ID;
+            item.AccountType = a.AccountType;
+            item.Amount = a.Amount;
+            item.Mobile = b.Mobile;
+            item.Name = b.Name;
+            return item;
+        }
 
         public User GetByMobile(string mobile)
         {
@@ -151,12 +216,18 @@ namespace Jango.Lab.Services
     {
         IPagedList<User> GetUserList(UserQuery query);
 
+        IPagedList<UserAccountVM> GetAccounts(UserAccountQuery query);
+
         User GetById(long id);
 
         void Save(User model);
 
         void Save(MemberVM model);
 
+        void Save(UserAccountVM model);
+
+        IQueryable<UserAccount> GetAccountsByUserId(long userId);
+        UserAccountVM GetAccountVmById(long id);
         /*
          * 
          * app

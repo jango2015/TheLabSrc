@@ -49,6 +49,7 @@
     <Compile Include="Query\CourseReserveQuery.cs" />
     <Compile Include="Query\UserQuery.cs" />
     <Compile Include="ViewModel\MemberVM.cs" />
+    <Compile Include="ViewModel\UserAccountVM.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "会员账户";
+    Layout = "~/Views/_LayoutView.cshtml";
+}
+@using Jango.Lab.ViewModels.ViewModel;
+@model UserAccountVM
+
+<link href="@Url.Content("~/css/bootstrap-datetimepicker.min.css")" rel="stylesheet" />
+@using (Ajax.BeginForm("AccountEdit", new AjaxOptions() { HttpMethod = "POST" }))
+{
+
+    <div class="form">
+        <div class="form-group">
+            <input type="hidden" name="ID" value="@Model.ID" />
+            <input type="hidden" name="UserID" value="@Model.UserID" />
+            <label>名称</label>
+            <input class="input input-control" type="text" required maxlength="100" name="Name" value="@Model.Name" />
+        </div>
+        <div class="form-group">
+            <label>手机号</label>
+            <input class="input input-control" type="tel" required maxlength="11" name="Mobile" value="@Model.Mobile" />
+        </div>
+
+        <div class="form-group">
+            <label>类型</label>
+            <select class="input input-control" required name="AccountType">
+                @{
+                    var s = Model.AccountType == 0 ? "selected" : "";
+                    var v = Model.AccountType == 1 ? "selected" : "";
+                }
+                <option value="">--请选择--</option>
+                <option value="0" @s   >积分</option>
+                <option value="1" @v   >余额</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>额度</label>
+            <input class="input input-control" type="number" required="" maxlength="100" name="Amount" value="@Model.Amount" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">提交</button>
+            <a class="btn btn-primary" href="/user/accountindex">返回</a>
+        </div>
+    </div>
+
+                    }
