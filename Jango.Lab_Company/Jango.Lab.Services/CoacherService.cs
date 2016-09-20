@@ -66,6 +66,10 @@ namespace Jango.Lab.Services
             }
             else
             {
+                var item = _coacherRep.GetById(model.ID);
+                item.Name = model.Name;
+                item.Avatar = model.Avatar;
+                item.Status = model.Status;
                 _coacherRep.Update(model);
             }
             _uow.Commit();

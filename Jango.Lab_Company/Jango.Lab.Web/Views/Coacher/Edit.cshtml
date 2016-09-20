@@ -6,6 +6,19 @@
 @using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "POST" }))
 {
     <link href="@Url.Content("~/css/fileinput.min.css")" rel="stylesheet" />
+    <style>
+        .fi_div {
+            width: 80%;
+            right: 0;
+            position: relative;
+            display: inline-block;
+        }
+
+            .fi_div .img_avatar {
+                width: 60px;
+                height: 60px;
+            }
+    </style>
     <div class="form">
         <div class="form-group">
             <input type="hidden" name="ID" value="@Model.ID" />
@@ -14,7 +27,16 @@
         </div>
         <div class="form-group">
             <label>头像</label>
-            <input id="input-2" name="Avatar" type="file" accept="image/*" class="file-loading">
+            <div class="fi_div">
+                @if (Model.ID > 0 && !string.IsNullOrEmpty(Model.Avatar))
+                {
+                    <div class="img_avatar">
+                        <img width="60px" height="60px" src='@Url.Content(string.Format("~/{0}", Model.Avatar) )' />
+                    </div>
+                }
+                <input id="input-2" name="fileAvatar" type="file" accept="image/*">
+                <input type="hidden" name="Avatar" id="Avatar" value="@Model.Avatar" />
+            </div>
             @*<input class="input input-control" type="file" required maxlength="11" name="Avatar" value="@Model.Avatar" />*@
         </div>
         <div class="form-group">
@@ -38,17 +60,27 @@
     <script>
         $(function () {
             $("#input-2").fileinput({
-                previewFileType: "image",
-                browseClass: "btn btn-success",
-                browseLabel: "Pick Image",
-                browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
-                removeClass: "btn btn-danger",
-                removeLabel: "Delete",
-                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-                uploadClass: "btn btn-info",
-                uploadLabel: "Upload",
-                uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+                'showPreview': false,
+                uploadUrl: "@Url.Content("~/upload/uploadImage")",
+                allowedFileExtensions: ['jpg', 'png', 'gif'],
+                showUpload: true, //是否显示上传按钮
+                maxFileSize: 1000,
+                maxFilesNum: 1
             });
+            $("#input-2").on("fileuploaded", function (e, d, p, idex) {
+                var jso = JSON.parse(d.jqXHR.responseText);
+                console.log(jso);
+                if (jso.success) {
+                    $("#Avatar").val(jso.filePath);
+                    $(".fi_div").find(".img_avatar").remove();
+                    $(".fi_div").append("<div class=\"img_avatar\"><img width=\"60px\" height=\"60px\" src='../.." + jso.filePath + "' /></div>");
+                    //$("#input-2").val(res.filePath);
+                }
+            });
+            $(".form-group").on("click", ".fileinput-remove-button", function () {
+                $("#Avatar").val("");
+                $(".fi_div").find(".img_avatar").remove();
+            })
         })
     </script>
 }
