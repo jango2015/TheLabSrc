@@ -82,11 +82,11 @@ namespace Jango.Lab.Services
             var cntemp_id = System.Configuration.ConfigurationManager.AppSettings["__juhe_cn_tempId"];
             var app = System.Configuration.ConfigurationManager.AppSettings["__juhe_cn_appName"];
             var tplvalue = "#app#=" + app + "&#code#=" + code;
-            var res = Lib.JuheSMS.JuheSendSms.SendSms(mobile, cntemp_id, tplvalue);
+            var res = JuheSendSms.SendSms(mobile, cntemp_id, tplvalue);
             _logsrv.Add(new Log()
             {
                 Action = "SendSms",
-                Message = (res.result == null ? "" : LitJson.JsonMapper.ToJson(res.result)) + res.reason,
+                Message = res.reason,
                 CreatedAt = DateTime.Now,
                 Operator = mobile,
                 UserID = 0

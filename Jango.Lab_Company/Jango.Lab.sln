@@ -11,12 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Web", "Jango.Lab.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Services", "Jango.Lab.Services\Jango.Lab.Services.csproj", "{F309E7E3-5541-4E45-A28C-5DCEAEBF96AD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{7350DD14-689B-497C-86D3-DB45567F2490}"
-	ProjectSection(SolutionItems) = preProject
-		Lib\Jango.Lib.UploadImage.dll = Lib\Jango.Lib.UploadImage.dll
-		Lib\JuheSms.dll = Lib\JuheSms.dll
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Wechat", "Jango.Lab.Wechat\Jango.Lab.Wechat.csproj", "{32CFF380-9908-4069-AAEF-70930C51ADA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.ViewModels", "Jango.Lab.ViewModels\Jango.Lab.ViewModels.csproj", "{934AF955-5144-4475-BA29-82E513229C9B}"

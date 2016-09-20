@@ -43,8 +43,9 @@ namespace Jango.Lab.Services
             model.ModifiedAt = DateTime.Now;
             if (model.ID == 0)
             {
-                model.Code = Guid.NewGuid().ToString().Replace("-", ""); /*Convert.ToBase64String(Encoding.UTF8.GetBytes(model.Mobile))*/;
+                model.Code = Guid.NewGuid().ToString().Replace("-", ""); /*Convert.ToBase64String(Encoding.UTF8.GetBytes(model.Mobile))*/
                 model.CreatedAt = DateTime.Now;
+                model.Birthday = DateTime.MinValue;
                 _userRep.Add(model);
             }
             else
@@ -74,6 +75,11 @@ namespace Jango.Lab.Services
         {
             if (string.IsNullOrEmpty(openid)) return new User();
             return _userRep.Get(x => x.OpenID == openid);
+        }
+
+        public bool IsExist(string mobile)
+        {
+            return _userRep.FindBy(x => x.Mobile == mobile).Any();
         }
 
         public User GetByCode(string code)
@@ -159,6 +165,7 @@ namespace Jango.Lab.Services
         User GetByMobile(string mobile);
         User GetByOpenId(string openid);
 
+        bool IsExist(string mobile);
         User GetByCode(string code);
 
         UserConsigneeInfo GetConsignneInfoByCode(string code);

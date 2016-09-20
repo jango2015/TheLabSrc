@@ -365,7 +365,7 @@
             $.get("/member/getuserinfo?code=" + code, function (res) {
                 console.log(res);
                 if (res.success) {
-                    $("#Name").text(res.data.Name);
+                    $("#Name").text(res.data.Name == null ? "" : res.data.Name);
                     $("#Integral").text(res.data.Integral);
                     $("#Balance").text(res.data.Balance);
                 } else {

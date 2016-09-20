@@ -78,6 +78,9 @@ namespace Jango.Lab.Wechat.Controllers
             try
             {
                 _userSrv.Save(model);
+                MemberInfo = null;
+                Code = model.Code;
+                LoadMemberInfo();
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
