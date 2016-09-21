@@ -20,4 +20,10 @@ namespace Jango.Lab.Services
 
 
     }
+
+    public class ConfigService
+    {
+        public static string AppID = System.Configuration.ConfigurationManager.AppSettings["__WechatAppID"] ?? "";
+        public  static  string AppSeret = System.Configuration.ConfigurationManager.AppSettings["__WechatAppSecret"] ?? "";
+    }
 }

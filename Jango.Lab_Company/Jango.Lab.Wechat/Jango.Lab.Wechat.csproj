@@ -278,6 +278,7 @@
     <Content Include="icon_product\iconfont.eot" />
     <Content Include="icon_product\iconfont.ttf" />
     <Content Include="icon_product\iconfont.woff" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

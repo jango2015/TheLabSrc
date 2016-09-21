@@ -4,7 +4,7 @@
 }
 <head>
     <title>注册</title>
-    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="@Url.Content("~/css/style2.css")">
     <script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="agreement fs20"><span class="ceb0">点击下一步</span>就代表您已同意《某某用户协议》</div>
-        <a href="#" class="next fs30 cfff tc register-btn">下一步</a>
+        <a href="#" class="next fs30 cfff tc register-btn">下一步</a><input type="hidden" name="OpenId" id="OpenId" />
     </div>
     <p class="tc fs24 ceb0 xs mt40"></p>
 </div>
@@ -60,6 +60,22 @@
         var t = 60;
         var c;
         $(function () {
+            var code = "@ViewBag.WeCode";
+            if (code.length > 0) {
+                alert(code);
+                var appid = "@ViewBag.WeAppID";
+                var appsecret = "@ViewBag.WeAppSecret";
+                alert(appid);
+                alert(appsecret);
+                var requrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + appsecret + "&code=" + code + "&grant_type=authorization_code";
+                $("#register .xs").text(requrl);
+                $.get(requrl, function (res) {
+                    alert(res);
+                    var s = JSON.parse(res);
+                    alert(s.openid);
+                    $("#OpenId").val(s.openid);
+                });
+            }
             $(".mask").hide();
             var url = 'register/sendcode?mobile=';
             $("#register .get_yzm").click(function () {

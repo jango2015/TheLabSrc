@@ -13,9 +13,13 @@ namespace Jango.Lab.Wechat.Controllers
     {
         private readonly IMessageService _msgSrv = LoadServices._MessageService;
         private readonly IUserService _userService = LoadServices._UserService;
-        public ActionResult Register()
+        [HttpGet]
+        public ActionResult Index(string code, string state)
         {
-            return View();
+            ViewBag.WeCode = code;
+            ViewBag.WeAppID = ConfigService.AppID;
+            ViewBag.WeAppSecret = ConfigService.AppSeret;
+            return View("Register");
         }
 
         public ActionResult SendCode(string mobile)
