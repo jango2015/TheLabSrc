@@ -1,0 +1,9 @@
+C:\Projects\westwood\Source\WX.Code\bin\Debug\WX.Code.dll.config
+C:\Projects\westwood\Source\WX.Code\bin\Debug\WX.Code.dll
+C:\Projects\westwood\Source\WX.Code\bin\Debug\WX.Code.pdb
+C:\Projects\westwood\Source\WX.Code\bin\Debug\CvtUtil.dll
+C:\Projects\westwood\Source\WX.Code\bin\Debug\LitJson.dll
+C:\Projects\westwood\Source\WX.Code\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\westwood\Source\WX.Code\bin\Debug\Zero.Log.Util.dll
+C:\Projects\westwood\Source\WX.Code\obj\Debug\WX.Code.dll
+C:\Projects\westwood\Source\WX.Code\obj\Debug\WX.Code.pdb
