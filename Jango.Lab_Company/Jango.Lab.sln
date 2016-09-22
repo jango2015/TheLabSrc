@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.Wechat", "Jango.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jango.Lab.ViewModels", "Jango.Lab.ViewModels\Jango.Lab.ViewModels.csproj", "{934AF955-5144-4475-BA29-82E513229C9B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB0EED7E-6052-4C2A-92AB-37B03414F38D}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\WX.Code.dll = Lib\WX.Code.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

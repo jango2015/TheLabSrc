@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Webdiyer.WebControls.Mvc;
+using WX.Code.pay;
 
 
 namespace Jango.Lab.Services
@@ -68,7 +69,7 @@ namespace Jango.Lab.Services
                 throw new Exception("card no has exist");
             }
         }
-        public void Charge(ChargeRecord model)
+        public string Charge(ChargeRecord model)
         {
             if (model.CardID == 0)
             {
@@ -80,18 +81,34 @@ namespace Jango.Lab.Services
                 throw new Exception("card information error;");
             }
             model.Amount = card.Amount;
-            //var user = _userRep.GetById(model.UserID);
+            var user = _userRep.GetById(model.UserID);
 
             model.SubmitAt = DateTime.Now;
             model.PaySatus = EnumPayStatus.ToPay;
+            model.tradeId = GetCardNo("CZP");
             //add record
             _chargeRecordRep.Add(model);
-            //add order 
+
+            if (string.IsNullOrEmpty(user.OpenID)) throw new ArgumentNullException("openid");
+            var payApi = new WX.Code.pay.PayApi();
+            var data = payApi.GetUnifiedOrderResult(new PayModel()
+            {
+                OpenId = user.OpenID,
+                TradeType = "JSAPI",
+                Body = card.Remark,
+                TotalFee = (Math.Round(card.Price * 1000)).ToString(),//change yuan to fen
+                DeviceInfo = "jsapi",
+                TimeStart = model.SubmitAt.ToString("yyyyMMddHHmmss")
+            });
+            var str = payApi.GetJsApiParameters(data);
             // pay 
             //change status
             //paysuccess
             SaveAccount(model, card.Amount, card.GiftIntegral);
 
+            _uow.Commit();
+
+            return str;
         }
 
         private void SaveAccount(ChargeRecord model, decimal cardAmount, decimal giftIntegral)
@@ -129,7 +146,6 @@ namespace Jango.Lab.Services
                 integral.ModifiedAt = DateTime.Now;
                 _userAccountRep.Update(integral);
             }
-            _uow.Commit();
             model.CurrentAmount = balance.Amount;
         }
 
@@ -153,9 +169,9 @@ namespace Jango.Lab.Services
             return _chargeRecordRep.GetAllList().OrderByDescending(x => x.ID).ToPagedList(query.PageNumber, query.PageSize);
         }
 
-        public string GetCardNo()
+        public string GetCardNo(string pre)
         {
-            string str = "CZ";
+            string str = pre;
             lock (obj)
             {
                 var it = _chargeCardRep.GetAll();
@@ -176,8 +192,8 @@ namespace Jango.Lab.Services
         ChargeCard GetById(long id);
         void Save(ChargeCard model);
 
-        string GetCardNo();
-        void Charge(ChargeRecord model);
+        string GetCardNo(string pre);
+        string Charge(ChargeRecord model);
         IQueryable<ChargeRecord> GetAllRecords();
         IPagedList<ChargeRecord> GetAllChargeRecordList(ChargeRecordQuery query);
         IQueryable<ChargeRecord> GetRecordByUserId(long userId);

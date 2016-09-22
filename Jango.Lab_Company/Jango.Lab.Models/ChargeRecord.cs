@@ -18,6 +18,7 @@ namespace Jango.Lab.Models
         public decimal Amount { get; set; }
         public decimal CurrentAmount { get; set; }
         public string tradeId { get; set; }
+        public string OpenId { get; set; }
 
         public EnumOrderStatus CardOrderStatus { get; set; }
         public EnumPayStatus PaySatus { get; set; }

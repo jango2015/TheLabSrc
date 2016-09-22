@@ -12,7 +12,7 @@ namespace Jango.Lab.Web.Controllers
     public class ChargeController : Controller
     {
         private readonly IChargeService _chargeSrv = LoadServices._ChargeService;
-      
+
         public ActionResult Index(ChargeQuery query)
         {
             var items = _chargeSrv.GetAllChargeCardList(query);
@@ -24,7 +24,7 @@ namespace Jango.Lab.Web.Controllers
             var item = _chargeSrv.GetById(id);
             if (item.ID == 0)
             {
-                item.CardNO = _chargeSrv.GetCardNo();
+                item.CardNO = _chargeSrv.GetCardNo("CZ");
             }
             return View(item);
         }

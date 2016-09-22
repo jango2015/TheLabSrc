@@ -56,6 +56,9 @@
       <HintPath>..\packages\Webdiyer.MvcPager.3.0.1.1\lib\Webdiyer.MvcPager.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WX.Code">
+      <HintPath>..\Lib\WX.Code.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChargeService.cs" />
