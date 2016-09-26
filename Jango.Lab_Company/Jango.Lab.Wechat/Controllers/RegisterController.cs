@@ -47,7 +47,7 @@ namespace Jango.Lab.Wechat.Controllers
             {
                 if (!_userService.IsExist(mobile))
                 {
-                    _userService.Save(new User() { Mobile = mobile, OpenID = openid });
+                    _userService.Save(new User() { Mobile = mobile, OpenID = openid, Name = WxService.GetNickName() });
                 }
                 var user = _userService.GetByMobile(mobile);
                 if (user != null && user.ID > 0)
@@ -57,8 +57,10 @@ namespace Jango.Lab.Wechat.Controllers
                 if (string.IsNullOrEmpty(user.OpenID))
                 {
                     user.OpenID = openid;
+                    user.Name = WxService.GetNickName();
                     _userService.Save(user);
                 }
+
                 return Json(new { success = true, code = Code }, JsonRequestBehavior.AllowGet);
             }
             else

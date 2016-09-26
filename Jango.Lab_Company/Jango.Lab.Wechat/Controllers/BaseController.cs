@@ -32,8 +32,10 @@ namespace Jango.Lab.Wechat.Controllers
                     var acounts = _userSrv.GetAccountsByUserId(user.ID);
                     if (MemberInfo != null)
                     {
-                        MemberInfo.Integral = acounts.Where(a => a.AccountType == (int)EnumAccountType.Integral).Sum(x => x.Amount);
-                        MemberInfo.Balance = acounts.Where(a => a.AccountType == (int)EnumAccountType.Balance).Sum(x => x.Amount);
+                        var its = acounts.Where(a => a.AccountType == (int)EnumAccountType.Integral);
+                        var bls = acounts.Where(a => a.AccountType == (int)EnumAccountType.Balance);
+                        MemberInfo.Integral = its.Any() ? its.Sum(x => x.Amount) : 0;
+                        MemberInfo.Balance = bls.Any() ? bls.Sum(x => x.Amount) : 0;
                     }
                 }
                 _user = user;

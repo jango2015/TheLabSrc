@@ -75,7 +75,7 @@ namespace Jango.Lab.Repositories.Lab
 
         public T Get(Expression<Func<T, bool>> wherExpression)
         {
-            return _db.Set<T>().FirstOrDefault(wherExpression);
+            return _db.Set<T>().AsNoTracking().FirstOrDefault(wherExpression);
         }
         public IEnumerable<T> GetAllList()
         {
