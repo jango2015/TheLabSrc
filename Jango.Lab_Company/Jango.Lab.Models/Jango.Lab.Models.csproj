@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201609180629210_addTradeId.Designer.cs">
       <DependentUpon>201609180629210_addTradeId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609260532072_UpdateDbs.cs" />
+    <Compile Include="Migrations\201609260532072_UpdateDbs.Designer.cs">
+      <DependentUpon>201609260532072_UpdateDbs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderItem.cs" />
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609180629210_addTradeId.resx">
       <DependentUpon>201609180629210_addTradeId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609260532072_UpdateDbs.resx">
+      <DependentUpon>201609260532072_UpdateDbs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

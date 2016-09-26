@@ -76,6 +76,7 @@ namespace Jango.Lab.Services
                 item.Email = model.Email;
                 item.Level = model.Level;
                 item.Birthday = model.Birthday;
+                item.OpenID = model.OpenID;
                 _userRep.Update(item);
             }
             _uow.Commit();

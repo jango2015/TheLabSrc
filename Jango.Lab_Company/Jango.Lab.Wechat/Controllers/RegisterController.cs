@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -16,9 +18,8 @@ namespace Jango.Lab.Wechat.Controllers
         [HttpGet]
         public ActionResult Index(string code, string state)
         {
-            ViewBag.WeCode = code;
-            ViewBag.WeAppID = ConfigService.AppID;
-            ViewBag.WeAppSecret = ConfigService.AppSeret;
+            var info = WxService.GetOpenId(code);
+            ViewBag.openid = info;
             return View("Register");
         }
 
@@ -38,7 +39,7 @@ namespace Jango.Lab.Wechat.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string mobile, string code)
+        public ActionResult Register(string mobile, string code, string openid)
         {
             if (string.IsNullOrEmpty(mobile)) return Json(new { success = false, msg = "手机号不能为空" }, JsonRequestBehavior.AllowGet);
             //Code = Convert.ToBase64String(Encoding.UTF8.GetBytes(mobile));
@@ -46,14 +47,18 @@ namespace Jango.Lab.Wechat.Controllers
             {
                 if (!_userService.IsExist(mobile))
                 {
-                    _userService.Save(new User() { Mobile = mobile });
+                    _userService.Save(new User() { Mobile = mobile, OpenID = openid });
                 }
                 var user = _userService.GetByMobile(mobile);
                 if (user != null && user.ID > 0)
                 {
                     Code = user.Code;
                 }
-
+                if (string.IsNullOrEmpty(user.OpenID))
+                {
+                    user.OpenID = openid;
+                    _userService.Save(user);
+                }
                 return Json(new { success = true, code = Code }, JsonRequestBehavior.AllowGet);
             }
             else

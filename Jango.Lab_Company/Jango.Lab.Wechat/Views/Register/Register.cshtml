@@ -60,22 +60,8 @@
         var t = 60;
         var c;
         $(function () {
-            var code = "@ViewBag.WeCode";
-            if (code.length > 0) {
-                alert(code);
-                var appid = "@ViewBag.WeAppID";
-                var appsecret = "@ViewBag.WeAppSecret";
-                alert(appid);
-                alert(appsecret);
-                var requrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid + "&secret=" + appsecret + "&code=" + code + "&grant_type=authorization_code";
-                $("#register .xs").text(requrl);
-                $.get(requrl, function (res) {
-                    alert(res);
-                    var s = JSON.parse(res);
-                    alert(s.openid);
-                    $("#OpenId").val(s.openid);
-                });
-            }
+            var openid = "@ViewBag.openid";
+            alert(openid);
             $(".mask").hide();
             var url = 'register/sendcode?mobile=';
             $("#register .get_yzm").click(function () {
@@ -112,7 +98,7 @@
                     $("#register .xs").text("请输入您的验证码");
                     return false;
                 }
-                $.post("register/Register", { mobile: val, code: cd }, function (res) {
+                $.post("register/Register", { mobile: val, code: cd, openid: "@ViewBag.openid" }, function (res) {
                     console.log(res);
                     if (res.success) {
                         location.href = "member/Index?code=" + res.code;
