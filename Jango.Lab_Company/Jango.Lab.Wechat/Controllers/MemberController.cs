@@ -19,7 +19,7 @@ namespace Jango.Lab.Wechat.Controllers
         }
 
         public ActionResult GetUserInfo(string code)
-        {
+       {
             try
             {
                 if (null == MemberInfo || string.IsNullOrEmpty(Code))
